@@ -30,7 +30,6 @@ public class Gestor <T>{
 
 
     /// GETTERS && SETTERS
-
     public ArrayList<T> getLista() {
         return lista;
     }
@@ -41,7 +40,6 @@ public class Gestor <T>{
 
 
     /// SOBREESCRITURA
-
     @Override
     public String toString() {
         return "Gestor{" +
