@@ -1,4 +1,8 @@
 package Modelo;
 
-public class Recepcionista {
+public class Recepcionista extends Usuario {
+
+
+
+
 }
