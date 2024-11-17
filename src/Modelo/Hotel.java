@@ -1,6 +1,7 @@
 package Modelo;
 
 import Contenedores.Gestor;
+import ENUMS.Estado;
 
 
 public class Hotel{
@@ -73,6 +74,7 @@ public class Hotel{
             habitaciones.agregar((Habitacion) objeto);
         }else if(objeto instanceof Reserva){
             reservas.agregar((Reserva) objeto);
+            ((Habitacion) objeto).setEstado(Estado.OCUPADA); ///VERIFICAR LUEGO
         }else if(objeto instanceof Usuario){
             usuarios.agregar((Usuario) objeto);
         }else{
