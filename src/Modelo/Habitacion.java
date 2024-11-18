@@ -1,6 +1,8 @@
 package Modelo;
 
 import ENUMS.Estado;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -9,21 +11,37 @@ public class Habitacion {
     private int numeroHabitacion;
     private int capacidad;
     private Estado estado;
-    private double precioPorNoche;
+    private double precioNoche;
 
 ///CONSTRUCTORES
 
 
-    public Habitacion(int capacidad, int numeroHabitacion, Estado estado, double precioPorNoche) {
+    public Habitacion(int capacidad, int numeroHabitacion, Estado estado, double precioNoche) {
         this.capacidad = capacidad;
         this.numeroHabitacion = numeroHabitacion;
         this.estado = estado;
-        this.precioPorNoche = precioPorNoche;
+        this.precioNoche = precioNoche;
     }
 
 
     public  Habitacion(){
 
+    }
+
+/// HABITACION A JSON
+    public JSONObject habitacionAJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("numeroHabitacion", this.numeroHabitacion);
+            jsonObject.put("capacidad", this.capacidad);
+            jsonObject.put("estado", this.estado);
+            jsonObject.put("precioNoche", this.precioNoche);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return jsonObject;
     }
 
 
@@ -54,12 +72,12 @@ public class Habitacion {
         this.estado = estado;
     }
 
-    public double getPrecioPorNoche() {
-        return precioPorNoche;
+    public double getprecioNoche() {
+        return precioNoche;
     }
 
-    public void setPrecioPorNoche(double precioPorNoche) {
-        this.precioPorNoche = precioPorNoche;
+    public void setprecioNoche(double precioNoche) {
+        this.precioNoche = precioNoche;
     }
 
     ///METODO EQUALS
@@ -89,7 +107,7 @@ public class Habitacion {
                 "numeroHabitacion=" + numeroHabitacion +
                 ", capacidad=" + capacidad +
                 ", estado=" + estado +
-                ", precioPorNoche=" + precioPorNoche +
+                ", precioPorNoche=" + precioNoche +
                 '}';
     }
 

@@ -1,7 +1,13 @@
 package Modelo;
 
 public class Recepcionista extends Usuario {
+    public Recepcionista(String nombre, String rol){
+        super(nombre, rol);
+    }
 
+    public  Recepcionista(){
+
+    }
 
 
 

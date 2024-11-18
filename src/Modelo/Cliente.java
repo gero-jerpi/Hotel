@@ -1,5 +1,8 @@
 package Modelo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Cliente {
     /// ATRIBUTOS
     private int id;
@@ -24,6 +27,26 @@ public class Cliente {
     public Cliente(){
         this.id = incremento++;
     }
+
+
+    /// CLIENTE A JSON
+    public JSONObject clienteAJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("dni", this.dni);
+            jsonObject.put("nombre", this.nombre);
+            jsonObject.put("domicilio", this.domicilio);
+            jsonObject.put("origen", this.origen);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+
+
+        return jsonObject;
+    }
+
+
 
     /// GETTERS && SETTERS
 

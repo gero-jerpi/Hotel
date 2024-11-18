@@ -2,6 +2,9 @@ package Modelo;
 
 import Contenedores.Gestor;
 import ENUMS.Estado;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Iterator;
 
@@ -9,17 +12,14 @@ import java.util.Iterator;
 public class Hotel {
 
     /// ATRIBUTOS
-    private int id;
     private String nombre;
     private Gestor<Habitacion> habitaciones;
     private Gestor<Reserva> reservas;
     private Gestor<Usuario> usuarios;
 
-    private static int incremento = 0;
 
     /// CONSTRUCTORES
     public Hotel(String nombre) {
-        this.id = incremento++;
         this.nombre = nombre;
         this.habitaciones = new Gestor<>();
         this.reservas = new Gestor<>();
@@ -27,11 +27,48 @@ public class Hotel {
     }
 
     public Hotel() {
-        this.id = incremento++;
         this.habitaciones = new Gestor<>();
         this.reservas = new Gestor<>();
         this.usuarios = new Gestor<>();
     }
+
+    /// HOTEL A JSON
+    public JSONObject hotelAJSON(){
+        JSONObject hotel = new JSONObject();
+        JSONArray habitaciones = new JSONArray();
+        JSONArray usuarios = new JSONArray();
+        JSONArray reservas = new JSONArray();
+
+
+        try {
+            hotel.put("nombre", this.nombre);
+
+            for(Habitacion habitacion: getHabitaciones().getLista()){
+                habitaciones.put(habitacion.habitacionAJSON());
+            }
+
+            hotel.put("habitaciones", habitaciones);
+
+            for(Reserva reserva: getReservas().getLista()){
+                reservas.put(reserva.reservaAJSON());
+            }
+
+            hotel.put("reservas", reservas);
+
+            for(Usuario usuario: getUsuarios().getLista()){
+                usuarios.put(usuario.usuarioAJSON());
+            }
+
+            hotel.put("usuarios", usuarios);
+
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return hotel;
+    }
+
 
     /// GETTERS && SETTERS
     public Gestor<Usuario> getUsuarios() {
@@ -66,9 +103,6 @@ public class Hotel {
         this.nombre = nombre;
     }
 
-    public int getId() {
-        return id;
-    }
 
     /// METODOS
     public boolean agregar(Object objeto) {
@@ -76,7 +110,7 @@ public class Hotel {
             habitaciones.agregar((Habitacion) objeto);
         } else if (objeto instanceof Reserva) {
             reservas.agregar((Reserva) objeto);
-            ((Habitacion) objeto).setEstado(Estado.OCUPADA); ///VERIFICAR LUEGO
+
         } else if (objeto instanceof Usuario) {
             usuarios.agregar((Usuario) objeto);
         } else {
@@ -167,7 +201,6 @@ public class Hotel {
     @Override
     public String toString() {
         return "Hotel{" +
-                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", habitaciones=" + habitaciones +
                 ", reservas=" + reservas +

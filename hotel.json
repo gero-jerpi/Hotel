@@ -1,0 +1,26 @@
+{
+    "habitaciones": [{
+        "estado": "DISPONIBLE",
+        "numeroHabitacion": 123,
+        "precioNoche": 123,
+        "capacidad": 123
+    }],
+    "reservas": [{
+        "cliente": {"id": 1},
+        "fechaInicio": "2024-11-18",
+        "id": 0,
+        "fechaFin": "2024-11-18",
+        "habitacion": {
+            "estado": "DISPONIBLE",
+            "numeroHabitacion": 123,
+            "precioNoche": 123,
+            "capacidad": 123
+        }
+    }],
+    "usuarios": [{
+        "id": 0,
+        "nombre": "gero",
+        "rol": "jungla"
+    }],
+    "nombre": "HOTEL"
+}

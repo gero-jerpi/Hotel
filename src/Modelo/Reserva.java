@@ -1,4 +1,8 @@
 package Modelo;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -27,6 +31,25 @@ public class Reserva {
     public Reserva() {
 
     }
+
+    /// RESERVA A JSON
+    public JSONObject reservaAJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("habitacion", this.habitacion.habitacionAJSON());
+            jsonObject.put("cliente", this.cliente.clienteAJSON());
+            jsonObject.put("fechaInicio", this.fechaInicio);
+            jsonObject.put("fechaFin", this.fechaFin);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return jsonObject;
+    }
+
+
 
     ///GETTERS Y SETTERS
 

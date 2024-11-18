@@ -1,5 +1,8 @@
 package Modelo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 public abstract class Usuario {
@@ -13,7 +16,7 @@ public abstract class Usuario {
 
    ///CONSTRUCTORES
 
-    public Usuario(int id, String nombre, String rol) {
+    public Usuario(String nombre, String rol) {
         this.id = idIncremental++;
         this.nombre = nombre;
         this.rol = rol;
@@ -49,7 +52,20 @@ public abstract class Usuario {
         this.id = id;
     }
 
+    /// USUARIO A JSON
+    public JSONObject usuarioAJSON(){
+        JSONObject jsonObject = new JSONObject();
 
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("nombre", this.nombre);
+            jsonObject.put("rol", this.rol);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return jsonObject;
+    }
 
 
 
