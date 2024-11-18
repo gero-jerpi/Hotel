@@ -61,6 +61,10 @@ public class MenuRecepcionista {
         System.out.println("Elegir una opcion: ");
         System.out.println("1. CHECK IN");
         System.out.println("2. CHECK OUT");
+        System.out.println("2. LISTAR HABITACIONES DISPONIBLES");
+        System.out.println("2. LISTAR HABITACIONES OCUPADAS");
+        System.out.println("2. LISTAR HABITACIONES NO DISPONIBLE");
+        System.out.println("4. CAMBIAR ESTADO HABITACION");
         System.out.println("3. GUARDAR DATOS");
 
 
