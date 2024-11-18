@@ -32,6 +32,18 @@ public class Reserva {
 
     }
 
+
+
+    ///METODOS DE LA CLASE
+
+
+    public  boolean verificarFecha(String fecha){
+        return fecha.matches("\\d{4}-\\d{2}-\\d{2}");
+
+    }
+
+
+
     /// JSON A RESERVA
     public static Reserva JSONAreserva(JSONObject jsonObject){
         Reserva reserva = new Reserva();

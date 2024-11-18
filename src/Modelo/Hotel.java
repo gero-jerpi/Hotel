@@ -33,7 +33,7 @@ public class Hotel {
     }
 
     /// HOTEL A JSON
-    public JSONObject hotelAJSON(){
+    public JSONObject hotelAJSON() {
         JSONObject hotel = new JSONObject();
         JSONArray habitaciones = new JSONArray();
         JSONArray usuarios = new JSONArray();
@@ -43,19 +43,19 @@ public class Hotel {
         try {
             hotel.put("nombre", this.nombre);
 
-            for(Habitacion habitacion: getHabitaciones().getLista()){
+            for (Habitacion habitacion : getHabitaciones().getLista()) {
                 habitaciones.put(habitacion.habitacionAJSON());
             }
 
             hotel.put("habitaciones", habitaciones);
 
-            for(Reserva reserva: getReservas().getLista()){
+            for (Reserva reserva : getReservas().getLista()) {
                 reservas.put(reserva.reservaAJSON());
             }
 
             hotel.put("reservas", reservas);
 
-            for(Usuario usuario: getUsuarios().getLista()){
+            for (Usuario usuario : getUsuarios().getLista()) {
                 usuarios.put(usuario.recepcionistaAJSON());
             }
 
@@ -163,6 +163,17 @@ public class Hotel {
 
         return mensaje.toString();
     }
+    //LISTAR TODAS LAS HABITACIONES
+    public String listarHabitaciones()
+    {
+        StringBuilder mensaje =new StringBuilder();
+        Iterator<Habitacion> iterator = habitaciones.getLista().iterator();
+        while(iterator.hasNext())
+        {   Habitacion habitacion=iterator.next();
+            mensaje.append("Habitacion NRO ").append(habitacion.toString()).append("\n");
+        }
+        return mensaje.toString();
+    }
 
     //LISTA LAS HABITACIONES NO DISPONIBLES Y SU ESTADO (EL POR QUÉ DE SU INDISPONIBILIDAD - OCUPADA - MANTENIMIENTO, ETC)
     public String listarHabitacionesNOdisponibles() {
@@ -197,6 +208,72 @@ public class Hotel {
     }
 
 
+    ///BUSCAR HABITACION POR NUMERO
+
+    public Habitacion buscarHabitacionXnumero(int numeroHabitacion) {
+
+        for (Habitacion habitacion : habitaciones.getLista()) {
+
+            if (habitacion.getNumeroHabitacion() == numeroHabitacion) {
+                return habitacion;
+            }
+        }
+        return null;
+    }
+
+    //ELIMINAR HABITACION CHEQUEARLA PROQ SE GURO LA HICE COMO EL CULO ASJDHASJKHDJKASHDJKASHDJKASHDIUHAWKJEHAKJSDHKAJSDHKJASHDKJASHDKJHASDJKHASDHKJASHDKJASHD
+    public boolean eliminarHabitacion(int num)
+    {
+        Habitacion aux=new Habitacion();
+        aux.setNumeroHabitacion(num);
+
+        if(habitaciones.getLista().remove(aux))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+    /////VERIFICAR DNI USUARIO EXISTE
+    public boolean verificarDniExistente(String dni)
+    {
+        Iterator<Usuario> iterator= usuarios.getLista().iterator();
+        while(iterator.hasNext())
+        {
+            Usuario usuario= iterator.next();
+
+            if(usuario instanceof Recepcionista)
+            {
+                if(((Recepcionista)usuario).getDni().compareToIgnoreCase(dni)==0)
+                {
+                    return true;
+                }
+            }else {
+                if(((Administrador)usuario).getDni().compareToIgnoreCase(dni)==0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    /////LISTAR RECEPCIONISTAS
+    public String listarRecpcionistas()
+    {
+        StringBuilder mensaje=new StringBuilder();
+
+        for(Usuario usuario: usuarios.getLista())
+        {
+            if(usuario instanceof Recepcionista)
+            {
+                mensaje.append(usuario.toString()).append("\n");
+            }
+        }
+        return mensaje.toString();
+    }
     /// SOBREESCRITURA
     @Override
     public String toString() {

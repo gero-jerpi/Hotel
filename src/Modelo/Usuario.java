@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Usuario {
 
     protected int id;
-    protected static int idIncremental;
+    protected static int idIncremental=1;
     protected String nombre;
     protected String rol;
     protected String dni;
