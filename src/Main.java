@@ -13,7 +13,7 @@ public class Main {
         Habitacion habitacion = new Habitacion(123, 123, Estado.DISPONIBLE, 123);
         hotel.agregar(habitacion);
 
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente("1234", "gero", "asd", "asd");
         LocalDate fecha1 = LocalDate.now();
         LocalDate fecha2 = LocalDate.now();
 

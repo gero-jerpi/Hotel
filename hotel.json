@@ -6,7 +6,13 @@
         "capacidad": 123
     }],
     "reservas": [{
-        "cliente": {"id": 1},
+        "cliente": {
+            "domicilio": "asd",
+            "id": 1,
+            "origen": "asd",
+            "nombre": "gero",
+            "dni": "1234"
+        },
         "fechaInicio": "2024-11-18",
         "id": 0,
         "fechaFin": "2024-11-18",
