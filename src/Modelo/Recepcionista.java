@@ -1,5 +1,6 @@
 package Modelo;
 
+import Excepciones.FechaInvalidaException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +35,7 @@ public class Recepcionista extends Usuario {
 
 /// CHECK IN
 
-    public Reserva crearReserva(Cliente cliente, Habitacion habitacion) {
+    public Reserva crearReserva(Cliente cliente, Habitacion habitacion) throws FechaInvalidaException {
         Reserva nuevaReserva = new Reserva();
 
         if (cliente == null || habitacion == null) {
@@ -46,13 +47,21 @@ public class Recepcionista extends Usuario {
 
         Scanner scanner = new Scanner(System.in);
 
+
         System.out.println("Ingrese la fecha de inicio de la reserva.\n"); ///QUIZAS ESTE PRINT NO DEBERÍA IR ACÁ
         String finicio = scanner.next();
-        if(!nuevaReserva.verificarFecha(finicio)){
-            throw new IllegalArgumentException();
-        }
+        if (!nuevaReserva.verificarFecha(finicio)) { //acá podria poner el scanner directamente
+            throw new FechaInvalidaException();
+        } else nuevaReserva.setFechaInicio(finicio);
         System.out.println("Ingrese la fecha de fin de la reserva.\n");
         String ffin = scanner.next();
+        if (!nuevaReserva.verificarFecha(ffin)) {
+            throw new FechaInvalidaException();
+        } else nuevaReserva.setFechaFin(ffin);
+
+
+
+
 
 
 

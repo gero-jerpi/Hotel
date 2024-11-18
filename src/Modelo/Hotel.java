@@ -33,7 +33,7 @@ public class Hotel {
     }
 
     /// HOTEL A JSON
-    public JSONObject hotelAJSON(){
+    public JSONObject hotelAJSON() {
         JSONObject hotel = new JSONObject();
         JSONArray habitaciones = new JSONArray();
         JSONArray usuarios = new JSONArray();
@@ -43,19 +43,19 @@ public class Hotel {
         try {
             hotel.put("nombre", this.nombre);
 
-            for(Habitacion habitacion: getHabitaciones().getLista()){
+            for (Habitacion habitacion : getHabitaciones().getLista()) {
                 habitaciones.put(habitacion.habitacionAJSON());
             }
 
             hotel.put("habitaciones", habitaciones);
 
-            for(Reserva reserva: getReservas().getLista()){
+            for (Reserva reserva : getReservas().getLista()) {
                 reservas.put(reserva.reservaAJSON());
             }
 
             hotel.put("reservas", reservas);
 
-            for(Usuario usuario: getUsuarios().getLista()){
+            for (Usuario usuario : getUsuarios().getLista()) {
                 usuarios.put(usuario.recepcionistaAJSON());
             }
 
@@ -194,6 +194,20 @@ public class Hotel {
             }
         }
         return mensaje.toString();
+    }
+
+
+    ///BUSCAR HABITACION POR NUMERO
+
+    public Habitacion buscarHabitacionXnumero(int numeroHabitacion) {
+
+        for (Habitacion habitacion : habitaciones.getLista()) {
+
+            if (habitacion.getNumeroHabitacion() == numeroHabitacion) {
+                return habitacion;
+            }
+        }
+        return null;
     }
 
 
