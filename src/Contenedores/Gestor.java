@@ -29,6 +29,7 @@ public class Gestor <T>{
     }
 
 
+
     /// GETTERS && SETTERS
     public ArrayList<T> getLista() {
         return lista;

@@ -12,15 +12,15 @@ public class Reserva {
     private static int idIncremental; //VERIFICAR LUEGO//
     private Habitacion habitacion;
     private Cliente cliente; //CLIENTE O ID CLIENTE?
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
 
     private int cantidadPersonas;
 
 
     //CONSTRUCTORES
 
-    public Reserva(Habitacion habitacion,Cliente cliente, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Reserva(Habitacion habitacion, Cliente cliente, String fechaInicio, String fechaFin) {
         this.habitacion = habitacion;
         this.id = idIncremental++;
         this.cliente = cliente;
@@ -31,6 +31,35 @@ public class Reserva {
     public Reserva() {
 
     }
+
+    /// JSON A RESERVA
+    public static Reserva JSONAreserva(JSONObject jsonObject){
+        Reserva reserva = new Reserva();
+
+
+
+        try{
+            Cliente cliente = Cliente.JSONAcliente(jsonObject.getJSONObject("cliente"));
+            Habitacion habitacion = Habitacion.JSONAhabitacion(jsonObject.getJSONObject("habitacion"));
+
+
+            reserva.setId(jsonObject.getInt("id"));
+            reserva.setCliente(cliente);
+            reserva.setFechaInicio(jsonObject.getString("fechaInicio"));
+            reserva.setFechaFin(jsonObject.getString("fechaFin"));
+            reserva.setHabitacion(habitacion);
+
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+        return reserva;
+    }
+
 
     /// RESERVA A JSON
     public JSONObject reservaAJSON(){
@@ -69,19 +98,19 @@ public class Reserva {
 
 
 
-    public LocalDate getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(LocalDate fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -89,9 +118,30 @@ public class Reserva {
         return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    ///METODO EQUALS
+    public static int getIdIncremental() {
+        return idIncremental;
+    }
+
+    public static void setIdIncremental(int idIncremental) {
+        Reserva.idIncremental = idIncremental;
+    }
+
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+///METODO EQUALS
 
 
     @Override

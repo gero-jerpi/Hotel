@@ -13,9 +13,9 @@
             "nombre": "gero",
             "dni": "1234"
         },
-        "fechaInicio": "2024-11-18",
+        "fechaInicio": "LocalDate.now();",
         "id": 0,
-        "fechaFin": "2024-11-18",
+        "fechaFin": "LocalDate.now();",
         "habitacion": {
             "estado": "DISPONIBLE",
             "numeroHabitacion": 123,
@@ -26,7 +26,8 @@
     "usuarios": [{
         "id": 0,
         "nombre": "gero",
-        "rol": "jungla"
+        "rol": "jungla",
+        "dni": "1234"
     }],
     "nombre": "HOTEL"
 }

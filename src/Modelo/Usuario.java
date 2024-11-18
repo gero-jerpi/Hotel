@@ -7,26 +7,61 @@ import java.util.Objects;
 
 public abstract class Usuario {
 
-    private int id;
-    private static int idIncremental;
-    private String nombre;
-    private String rol;
+    protected int id;
+    protected static int idIncremental;
+    protected String nombre;
+    protected String rol;
+    protected String dni;
 
 
 
    ///CONSTRUCTORES
 
-    public Usuario(String nombre, String rol) {
+    public Usuario(String nombre, String rol, String dni) {
         this.id = idIncremental++;
         this.nombre = nombre;
         this.rol = rol;
+        this.dni = dni;
     }
 
     public Usuario(){
     }
 
+    /// RECEPCIONISTA A JSON
+    public JSONObject recepcionistaAJSON(){
+        JSONObject jsonObject = new JSONObject();
+
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("nombre", this.nombre);
+            jsonObject.put("rol", this.rol);
+            jsonObject.put("dni", this.dni);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return jsonObject;
+    }
+
+
 //GETTERS Y SETTERS
 
+
+    public static int getIdIncremental() {
+        return idIncremental;
+    }
+
+    public static void setIdIncremental(int idIncremental) {
+        Usuario.idIncremental = idIncremental;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
     public String getRol() {
         return rol;
@@ -52,20 +87,6 @@ public abstract class Usuario {
         this.id = id;
     }
 
-    /// USUARIO A JSON
-    public JSONObject usuarioAJSON(){
-        JSONObject jsonObject = new JSONObject();
-
-        try{
-            jsonObject.put("id", this.id);
-            jsonObject.put("nombre", this.nombre);
-            jsonObject.put("rol", this.rol);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        return jsonObject;
-    }
 
 
 

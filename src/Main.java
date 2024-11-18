@@ -4,20 +4,36 @@ import UI.Login;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+    Login login = new Login();
+    login.elegirMenu();
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         Hotel hotel = new Hotel();
         Habitacion habitacion = new Habitacion(123, 123, Estado.DISPONIBLE, 123);
         hotel.agregar(habitacion);
 
         Cliente cliente = new Cliente("1234", "gero", "asd", "asd");
-        LocalDate fecha1 = LocalDate.now();
-        LocalDate fecha2 = LocalDate.now();
+        String fecha1 = "LocalDate.now();";
+        String fecha2 = "LocalDate.now();";
 
-        Recepcionista recepcionista = new Recepcionista("gero", "jungla");
+        Recepcionista recepcionista = new Recepcionista("gero", "jungla", "1234");
 
         hotel.setNombre("HOTEL");
 
@@ -29,10 +45,7 @@ public class Main {
 
 
 
-/*
-        Login login = new Login();
-        login.elegirMenu("recepcionista");
-*/
+
 
         /// ADMIN
         // CREAR HABITACION

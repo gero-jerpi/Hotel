@@ -56,7 +56,7 @@ public class Hotel {
             hotel.put("reservas", reservas);
 
             for(Usuario usuario: getUsuarios().getLista()){
-                usuarios.put(usuario.usuarioAJSON());
+                usuarios.put(usuario.recepcionistaAJSON());
             }
 
             hotel.put("usuarios", usuarios);

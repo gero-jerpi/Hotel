@@ -28,6 +28,24 @@ public class Cliente {
         this.id = incremento++;
     }
 
+    /// JSON A CLIENTE
+    public static Cliente JSONAcliente(JSONObject jsonObject){
+        Cliente cliente = new Cliente();
+
+        try{
+            cliente.setId(jsonObject.getInt("id"));
+            cliente.setNombre(jsonObject.getString("nombre"));
+            cliente.setDni(jsonObject.getString("dni"));
+            cliente.setDomicilio(jsonObject.getString("domicilio"));
+            cliente.setOrigen(jsonObject.getString("origen"));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return cliente;
+    }
+
 
     /// CLIENTE A JSON
     public JSONObject clienteAJSON(){

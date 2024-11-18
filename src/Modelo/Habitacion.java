@@ -28,6 +28,26 @@ public class Habitacion {
 
     }
 
+
+    /// JSON A HABITACION
+    public static Habitacion JSONAhabitacion(JSONObject jsonObject){
+        Habitacion habitacion = new Habitacion();
+
+        try{
+            String estado = jsonObject.getString("estado");
+
+            habitacion.setNumeroHabitacion(jsonObject.getInt("numeroHabitacion"));
+            habitacion.setCapacidad(jsonObject.getInt("capacidad"));
+            habitacion.setEstado(Estado.valueOf(estado));
+            habitacion.setprecioNoche(jsonObject.getDouble("precioNoche"));
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return habitacion;
+    }
+
 /// HABITACION A JSON
     public JSONObject habitacionAJSON(){
         JSONObject jsonObject = new JSONObject();
