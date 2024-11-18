@@ -2,12 +2,14 @@ package UI;
 
 import ENUMS.Estado;
 import Excepciones.FechaInvalidaException;
+import Excepciones.HabitacionNoDisponibleException;
 import Modelo.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.xml.transform.Source;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class MenuRecepcionista {
@@ -125,13 +127,16 @@ public class MenuRecepcionista {
 
 
                     try {
-                        Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
-                        Reserva nuevaReserva = recepcionista.crearReserva(clienteNuevo, habitacionAux); //CREO LA RESERVA
+                        Habitacion habitacionNueva = hotel.buscarHabitacionXnumero(scanner.nextInt());
+                        if (habitacionNueva.getEstado() != Estado.DISPONIBLE) {
+                            throw new HabitacionNoDisponibleException();
+                        }
+                        Reserva nuevaReserva = recepcionista.crearReserva(clienteNuevo, habitacionNueva); //CREO LA RESERVA
                         scanner.nextLine();
-                        habitacionAux.setEstado(Estado.OCUPADA); //LA SETEO EN OCUPADA
+                        habitacionNueva.setEstado(Estado.OCUPADA); //LA SETEO EN OCUPADA
                         hotel.getReservas().agregar(nuevaReserva); //Agrego la reserva a la lista
 
-                    } catch (FechaInvalidaException e) {
+                    } catch (FechaInvalidaException | HabitacionNoDisponibleException e) {
                         throw new RuntimeException(e);
                     }
 
@@ -141,11 +146,22 @@ public class MenuRecepcionista {
                 case 2: {
 
 
+                    System.out.println("Ingrese el numero de habitación para terminar la reserva."); //PDRIA SSER CON DNI CLIENTE
 
+                    Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
+                    if (habitacionAux == null) {
+                        throw new IllegalArgumentException("ERROR:NUMERO DE HABITACIÓN INCORRECTO");
+                    }
 
+                    Iterator<Reserva> iterator = hotel.getReservas().getLista().iterator();
+                    while (iterator.hasNext()) {
+                        Reserva reserva = iterator.next();
+                        if (reserva.getHabitacion().equals(habitacionAux)) {
+                            iterator.remove();
+                            reserva.getHabitacion().setEstado(Estado.DISPONIBLE);
+                        }
 
-
-
+                    }
 
                     break;
                 }

@@ -59,13 +59,6 @@ public class Recepcionista extends Usuario {
             throw new FechaInvalidaException();
         } else nuevaReserva.setFechaFin(ffin);
 
-
-
-
-
-
-
-
         return nuevaReserva;
     }
 

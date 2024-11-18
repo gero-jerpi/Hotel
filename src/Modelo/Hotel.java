@@ -197,7 +197,7 @@ public class Hotel {
     }
 
 
-    ///BUSCAR HABITACION POR NUMERO
+    ///BUSCAR HABITACION POR NUMERO (QUIZAS DEBERIA IR EN HABITACION)
 
     public Habitacion buscarHabitacionXnumero(int numeroHabitacion) {
 
