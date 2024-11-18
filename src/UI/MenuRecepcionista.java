@@ -128,6 +128,7 @@ public class MenuRecepcionista {
 
                     try {
                         Habitacion habitacionNueva = hotel.buscarHabitacionXnumero(scanner.nextInt());
+                        scanner.nextLine();
                         if (habitacionNueva.getEstado() != Estado.DISPONIBLE) {
                             throw new HabitacionNoDisponibleException();
                         }
@@ -135,6 +136,7 @@ public class MenuRecepcionista {
                         scanner.nextLine();
                         habitacionNueva.setEstado(Estado.OCUPADA); //LA SETEO EN OCUPADA
                         hotel.getReservas().agregar(nuevaReserva); //Agrego la reserva a la lista
+                        System.out.println("Check-in realizado con éxito.");
 
                     } catch (FechaInvalidaException | HabitacionNoDisponibleException e) {
                         throw new RuntimeException(e);
@@ -149,6 +151,7 @@ public class MenuRecepcionista {
                     System.out.println("Ingrese el numero de habitación para terminar la reserva."); //PDRIA SSER CON DNI CLIENTE
 
                     Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
+                    scanner.nextLine();
                     if (habitacionAux == null) {
                         throw new IllegalArgumentException("ERROR:NUMERO DE HABITACIÓN INCORRECTO");
                     }
@@ -156,9 +159,10 @@ public class MenuRecepcionista {
                     Iterator<Reserva> iterator = hotel.getReservas().getLista().iterator();
                     while (iterator.hasNext()) {
                         Reserva reserva = iterator.next();
-                        if (reserva.getHabitacion().equals(habitacionAux)) {
-                            iterator.remove();
-                            reserva.getHabitacion().setEstado(Estado.DISPONIBLE);
+                        if (reserva.getHabitacion().equals(habitacionAux)) { //SI LA RESERVA TIENE LA MISMA HABITACION
+                            iterator.remove();                                      //ELIMINO LA RESERVA
+                            reserva.getHabitacion().setEstado(Estado.DISPONIBLE); //SETEO LA HABITACIÓN A DISPONIBLE ^ D ^
+                            System.out.println("Check-in Realizado con éxito.");
                         }
 
                     }
@@ -167,33 +171,72 @@ public class MenuRecepcionista {
                 }
                 case 3: {
 
+                    hotel.listarHabitacionesDisponibles();
 
                     break;
                 }
 
                 case 4: {
 
+                    hotel.listarHabitacionesOcupadas();
+
                     break;
                 }
 
                 case 5: {
 
+                    hotel.listarHabitacionesNOdisponibles();
                     break;
                 }
 
                 case 6: {
+
+                    System.out.println("Ingrese el número de habitación que desea modificar :");
+                    Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
+
+                    if (habitacionAux == null) {
+                        throw new IllegalArgumentException("ERROR:NUMERO INCORRECTO");
+                    }
+                    scanner.nextLine();
+                    menuEstadosParaModificar();
+                    String estadoHabitacion = scanner.nextLine().toUpperCase(); //El cliente ingresa un estado de habitación (ignora minusculas supongo)
+
+
+                    try {
+                        Estado estado = Estado.valueOf(estadoHabitacion);   //creo un estado nuevo y lo igualo al ingresado por teclado (si coincide con algun valor del enum)
+                        Iterator<Habitacion> iterador = hotel.getHabitaciones().getLista().iterator(); //iterador para las habitaciones
+                        while (iterador.hasNext()) {
+                            Habitacion habitacion = iterador.next();
+                            if (habitacion.equals(habitacionAux)) { //si las habitacion ingresada existe le cambio el estado al ingresado x teclado
+                                habitacion.setEstado(estado);
+                                System.out.println("Estado cambiado correctamente!");
+                            }
+                        }
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException(e);
+                    }
+
 
                     break;
                 }
 
                 case 7: {
 
+
+                    ///ACA SE GUARDARIAN LOS DATOS
+
                     break;
                 }
 
                 case 8: {
 
-                    break;
+                    System.out.println("╭────── · · ୨୧ · · ──────╮");
+                    System.out.println("    Saliendo del menú");
+                    System.out.println( "╰────── · · ୨୧ · · ──────╯");
+
+
+
+
                 }
 
                 default: {
@@ -266,6 +309,18 @@ public class MenuRecepcionista {
 
     public boolean verificarLongitudDNI(String dni) {
         return dni != null && dni.length() >= 7 && dni.length() <= 8;
+    }
+
+
+    public void menuEstadosParaModificar() {
+
+        System.out.println("Ingrese un estado para asignar a la habitación");
+        System.out.println("1-DISPONIBLE");
+        System.out.println("2-OCUPADA");
+        System.out.println("3-RESERVADA");
+        System.out.println("4-MANTENIMIENTO");
+        System.out.println("5-LIMPIEZA");
+
     }
 
 

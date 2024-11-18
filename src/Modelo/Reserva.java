@@ -3,15 +3,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class Reserva {
 
     private int id;
-    private static int idIncremental; //VERIFICAR LUEGO//
+    private static int idIncremental=0;
     private Habitacion habitacion;
-    private Cliente cliente; //CLIENTE O ID CLIENTE?
+    private Cliente cliente;
     private String fechaInicio;
     private String fechaFin;
 
