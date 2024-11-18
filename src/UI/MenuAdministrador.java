@@ -84,25 +84,49 @@ public class MenuAdministrador {
 
                             try{
 
+
                                 System.out.println("Ingrese numero de habitacion");
-                                aux.setNumeroHabitacion(scanner.nextInt());
-
-
-
-
-
+                                int numHabitacion=scanner.nextInt();
+                                scanner.nextLine();
+                                if(numHabitacion<=0)
+                                {
+                                    throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion debe ser mayor a 0");
+                                }
+                                aux.setNumeroHabitacion(numHabitacion);
 
                                 System.out.println("Ingrese capacidad de la habitacion");
-                                aux.setCapacidad(scanner.nextInt());
+                                int capacidadHabitacion= scanner.nextInt();
+                                scanner.nextLine();
+                                if(capacidadHabitacion<=0)
+                                {
+                                    throw new DatosHabitacionInvalidosExcepcion("La capacidad debe ser mayor a 0");
+                                }
+                                aux.setCapacidad(capacidadHabitacion);
+
                                 System.out.println("Ingrese estado de la habitacion");
                                 for(Estado estado:Estado.values())
                                 {
-                                    System.out.println("- "+estado);
+                                    System.out.println("-"+estado);
                                 }
+                                String estadoHabitacion= scanner.nextLine().toUpperCase();
+                                Estado estado=Estado.valueOf(estadoHabitacion);
+                                aux.setEstado(estado);
 
+                                System.out.println("Ingrese precio de la habitacion");
+                                double precioHabitacion = scanner.nextDouble();
+                                if(precioHabitacion<=0)
+                                {
+                                    throw new DatosHabitacionInvalidosExcepcion("La habitacion no puede dar dinero ni ser gratis C:");
+                                }
+                                aux.setprecioNoche(precioHabitacion);
 
-                                ///verificar
-                                hotel.agregar(aux);
+                                if(hotel.agregar(aux))
+                                {
+                                    System.out.println("Habitacion añadida correctamente");
+                                    habitacionValida=true;
+                                }else{
+                                    System.out.println("Hubo un error al añadir la habitacion");
+                                }
 
                             }catch(InputMismatchException e)
                             {
@@ -114,8 +138,6 @@ public class MenuAdministrador {
                             }
 
                        }
-
-
 
                     break;
                 }
