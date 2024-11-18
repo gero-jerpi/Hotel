@@ -57,22 +57,22 @@ public class MenuAdministrador {
         System.out.println(hotel);
 
 
-
-        System.out.println("Elegir una opcion");
-        System.out.println("1. Agregar habitacion");
-        System.out.println("2. Eliminar habitacion");
-        System.out.println("3. Listar habitaciones");
-        System.out.println("4. Agregar recepcionista");
-        System.out.println("5. Eliminar recepcionista");
-        System.out.println("6. Listar recepcionistas");
-        System.out.println("7. Guardar datos");
-        System.out.println("0. Finalizar ejecucion");
-
         int opcion = 0;
-        opcion=scanner.nextInt();
-
-
         do {
+
+            System.out.println("Elegir una opcion");
+            System.out.println("1. Agregar habitacion");
+            System.out.println("2. Eliminar habitacion");
+            System.out.println("3. Listar habitaciones");
+            System.out.println("4. Agregar recepcionista");
+            System.out.println("5. Eliminar recepcionista");
+            System.out.println("6. Listar recepcionistas");
+            System.out.println("7. Guardar datos");
+            System.out.println("0. Finalizar ejecucion");
+
+            opcion=scanner.nextInt();
+
+
             switch (opcion){
                 case 1: {
                     Habitacion aux =new Habitacion();
