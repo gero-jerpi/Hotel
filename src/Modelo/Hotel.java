@@ -260,6 +260,20 @@ public class Hotel {
         }
         return false;
     }
+    /////LISTAR RECEPCIONISTAS
+    public String listarRecpcionistas()
+    {
+        StringBuilder mensaje=new StringBuilder();
+
+        for(Usuario usuario: usuarios.getLista())
+        {
+            if(usuario instanceof Recepcionista)
+            {
+                mensaje.append(usuario.toString()).append("\n");
+            }
+        }
+        return mensaje.toString();
+    }
     /// SOBREESCRITURA
     @Override
     public String toString() {

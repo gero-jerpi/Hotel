@@ -220,17 +220,11 @@ public class MenuAdministrador {
                     break;
                 }
                 case 6:{
-                    System.out.println();
-
-
-
-
-
-
+                    System.out.println(hotel.listarRecpcionistas());
                     break;
                 }
                 case 7:{
-
+                        JsonUtils.escribir(hotel.hotelAJSON(),"hotel.json");
                     break;
                 }
 
