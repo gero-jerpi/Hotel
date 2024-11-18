@@ -142,22 +142,90 @@ public class MenuAdministrador {
                     break;
                 }
                 case 2:{
-
+                    System.out.println("Ingrese el numero de habitacion que desea eliminar");
+                    int numHabitacion=scanner.nextInt();
+                    scanner.nextLine();
+                    if(hotel.eliminarHabitacion(numHabitacion))
+                    {
+                        System.out.println("La habitacion se elimino correctamente");
+                    }else
+                    {
+                        System.out.println("La habitacion ingresada no existe");
+                    }
                     break;
                 }
                 case 3:{
-
+                    System.out.println(hotel.listarHabitaciones());
                     break;
                 }
                 case 4:{
+                    Recepcionista recepcionista=new Recepcionista();
+                    System.out.println("Ingrese nombre del recepcionista");
+                    String nombreRecepcionista=scanner.next();
+                    recepcionista.setNombre(nombreRecepcionista);
+                    recepcionista.setRol("Recepcionista");
 
+                    boolean dniValido=false;
+
+                    while(!dniValido)
+                    {
+                        System.out.println("Ingrese dni del recepsionista");
+                        String dniRecepsionista=scanner.next();
+                        if(hotel.verificarDniExistente(dniRecepsionista))
+                        {
+                            System.out.println("El dni ingresado ya existe");
+                        }else
+                        {
+                            recepcionista.setDni(dniRecepsionista);
+                            dniValido=true;
+                        }
+                    }
+
+                    if(hotel.agregar(recepcionista))
+                    {
+                        System.out.println("El recepcionista se agrego correctamente");
+                    }else {
+                        System.out.println("Hubo un error al agregar el recepcionista");
+                    }
                     break;
                 }
                 case 5: {
 
+                    boolean idValido=false;
+                    Recepcionista aux= new Recepcionista();
+                    while(!idValido)
+                    {
+                        try{
+
+                            System.out.println("Ingrese la id del recepcionista a elimianr");
+                            int idRecepcionista=scanner.nextInt();
+                            scanner.nextLine();
+                            idValido=true;
+                            aux.setId(idRecepcionista);
+                            if(hotel.getUsuarios().getLista().remove(aux))
+                            {
+                                System.out.println("El recepcionista fue eliminado correctamente");
+                            }else
+                            {
+                                System.out.println("El dni ingresado no existe");
+                            }
+
+
+                        }catch(InputMismatchException e)
+                        {
+                            System.out.println("Debe ingresar un dni valido");
+                            scanner.nextLine();
+                        }
+                    }
                     break;
                 }
                 case 6:{
+                    System.out.println();
+
+
+
+
+
 
                     break;
                 }
