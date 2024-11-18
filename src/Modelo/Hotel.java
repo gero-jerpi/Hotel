@@ -98,7 +98,6 @@ public class Hotel {
         mensaje.append("Habitaciones ocupadas: \n");
         Iterator<Reserva> iteradorReserva = reservas.getLista().iterator();
 
-
         while (iteradorReserva.hasNext()) {
             Reserva reserva = iteradorReserva.next();
             if (reserva.getHabitacion().getEstado() == Estado.OCUPADA) {
@@ -108,8 +107,8 @@ public class Hotel {
 
         }
 
-
         return mensaje.toString();
+
     }
 
     //LISTA LAS HABITACIONES DISPONIBLES
@@ -124,8 +123,6 @@ public class Hotel {
 
             if (habitacion.getEstado() == Estado.DISPONIBLE) {
                 mensaje.append("Habitacion NRO ").append(habitacion.getNumeroHabitacion()).append("\n").append(habitacion.toString());
-
-
             }
 
         }

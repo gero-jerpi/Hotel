@@ -50,8 +50,10 @@ public abstract class Usuario {
     }
 
 
-///METODO EQUALS
 
+
+
+    ///METODO EQUALS
 
     @Override
     public boolean equals(Object o) {

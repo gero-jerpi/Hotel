@@ -1,8 +1,5 @@
 package Modelo;
-
-import java.sql.PreparedStatement;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Reserva {
@@ -14,12 +11,10 @@ public class Reserva {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-private int cantidadPersonas;
+    private int cantidadPersonas;
 
 
-
-//CONSTRUCTORES
-
+    //CONSTRUCTORES
 
     public Reserva(Habitacion habitacion,Cliente cliente, LocalDate fechaInicio, LocalDate fechaFin) {
         this.habitacion = habitacion;
