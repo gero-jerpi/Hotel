@@ -1,5 +1,7 @@
 package UI;
 
+import ENUMS.Estado;
+import Excepciones.DatosHabitacionInvalidosExcepcion;
 import Modelo.Habitacion;
 import Modelo.Hotel;
 import Modelo.Recepcionista;
@@ -8,6 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class MenuAdministrador {
     public MenuAdministrador(){
 
@@ -15,9 +20,9 @@ public class MenuAdministrador {
 
 
 
-    public void menu(){
+    public void menu()throws DatosHabitacionInvalidosExcepcion{
         Hotel hotel = new Hotel();
-
+        Scanner scanner =new Scanner(System.in);
         try{
             JSONObject datosJSON = new JSONObject(JsonUtils.leer("hotel.json"));
 
@@ -64,16 +69,89 @@ public class MenuAdministrador {
         System.out.println("0. Finalizar ejecucion");
 
         int opcion = 0;
+        opcion=scanner.nextInt();
 
-        switch (opcion){
-            case 1: {
 
-                break;
+        do {
+            switch (opcion){
+                case 1: {
+                    Habitacion aux =new Habitacion();
+                    Boolean habitacionValida=false;
+
+
+                       while(!habitacionValida)
+                       {
+
+                            try{
+
+                                System.out.println("Ingrese numero de habitacion");
+                                aux.setNumeroHabitacion(scanner.nextInt());
+
+
+
+
+
+
+                                System.out.println("Ingrese capacidad de la habitacion");
+                                aux.setCapacidad(scanner.nextInt());
+                                System.out.println("Ingrese estado de la habitacion");
+                                for(Estado estado:Estado.values())
+                                {
+                                    System.out.println("- "+estado);
+                                }
+
+
+                                ///verificar
+                                hotel.agregar(aux);
+
+                            }catch(InputMismatchException e)
+                            {
+                                System.out.println("Debe ingresar los datos pedidos");
+                                scanner.nextLine();
+                            }catch(IllegalArgumentException e)
+                            {
+                                System.out.println("Estado ingresado no valido");
+                            }
+
+                       }
+
+
+
+                    break;
+                }
+                case 2:{
+
+                    break;
+                }
+                case 3:{
+
+                    break;
+                }
+                case 4:{
+
+                    break;
+                }
+                case 5: {
+
+                    break;
+                }
+                case 6:{
+
+                    break;
+                }
+                case 7:{
+
+                    break;
+                }
+
+                default:
+                    System.out.println("Opcion equivocada");
             }
 
-            default:
-                System.out.println("Opcion equivocada");
-        }
+
+
+
+        }while(opcion!=0);
 
 
 
@@ -83,6 +161,7 @@ public class MenuAdministrador {
 
 
 
+     scanner.close();
     }
 
 

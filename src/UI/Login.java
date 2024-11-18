@@ -1,6 +1,7 @@
 package UI;
 
 import Contenedores.Gestor;
+import Excepciones.DatosHabitacionInvalidosExcepcion;
 import Modelo.Recepcionista;
 import Modelo.Usuario;
 import org.json.JSONArray;
@@ -14,7 +15,7 @@ public class Login {
 
     }
 
-    public void elegirMenu(){
+    public void elegirMenu()throws DatosHabitacionInvalidosExcepcion {
         Gestor<Usuario> listaUsuarios = new Gestor<>();
         try {
             JSONObject dataJSON = new JSONObject(JsonUtils.leer("hotel.json"));
