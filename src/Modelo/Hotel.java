@@ -209,8 +209,6 @@ public class Hotel {
         }
         return null;
     }
-
-
     /// SOBREESCRITURA
     @Override
     public String toString() {
