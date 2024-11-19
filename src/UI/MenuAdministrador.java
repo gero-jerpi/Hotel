@@ -50,17 +50,29 @@ public class MenuAdministrador {
 
         int opcion = 0;
         do {
-
-            System.out.println("Elegir una opcion");
-            System.out.println("1. Agregar habitacion");
-            System.out.println("2. Eliminar habitacion");
-            System.out.println("3. Listar habitaciones");
-            System.out.println("4. Agregar recepcionista");
-            System.out.println("5. Eliminar recepcionista");
-            System.out.println("6. Listar recepcionistas");
-            System.out.println("7. Guardar datos");
-            System.out.println("0. Finalizar ejecucion");
-
+            System.out.println("""
+                     Elige una de las siguientes opciones:
+                     __________
+                     HABITACION
+                     ----------
+                     1) Agregar habitación.
+                     2) Eliminar habitación.
+                     3) Listar habitaciones.
+                    
+                     ______________
+                     Recepcionistas
+                     --------------
+                    
+                     4) Agregar recepcionista.
+                     5) Eliminar recepcionista.
+                     6) Listar recepcionistas.
+                    
+                     ______
+                     Extras
+                     ------
+                     7) Guardar datos.
+                     0) Finalizar ejecución.    
+                      """);
             opcion=scanner.nextInt();
 
 
@@ -75,30 +87,30 @@ public class MenuAdministrador {
                             int valido=1;
 
                                 try{
-                                    System.out.println("Ingrese numero de habitacion");
+                                    System.out.println("Ingrese numero de habitacion \n");
                                     int numHabitacion=scanner.nextInt();
                                     scanner.nextLine();
                                     if(numHabitacion<=0)
                                     {
-                                        throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion debe ser mayor a 0");
+                                        throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion debe ser mayor a 0\n");
                                     }
                                     aux.setNumeroHabitacion(numHabitacion);
 
                                     if(hotel.getHabitaciones().getLista().contains(aux))
                                     {
-                                        throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion ya existe");
+                                        throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion ya existe\n");
                                     }
 
-                                    System.out.println("Ingrese capacidad de la habitacion");
+                                    System.out.println("Ingrese capacidad de la habitacion\n");
                                     int capacidadHabitacion= scanner.nextInt();
                                     scanner.nextLine();
                                     if(capacidadHabitacion<=0)
                                     {
-                                        throw new DatosHabitacionInvalidosExcepcion("La capacidad debe ser mayor a 0");
+                                        throw new DatosHabitacionInvalidosExcepcion("La capacidad debe ser mayor a 0\n");
                                     }
                                     aux.setCapacidad(capacidadHabitacion);
 
-                                    System.out.println("Ingrese estado de la habitacion");
+                                    System.out.println("Ingrese estado de la habitacion\n");
                                     for(Estado estado:Estado.values())
                                     {
                                         if(!estado.equals(Estado.OCUPADA) && !estado.equals(Estado.RESERVADA)){
@@ -109,21 +121,21 @@ public class MenuAdministrador {
                                     Estado estado=Estado.valueOf(estadoHabitacion);
                                     aux.setEstado(estado);
 
-                                    System.out.println("Ingrese precio de la habitacion");
+                                    System.out.println("Ingrese precio de la habitacion\n");
                                     double precioHabitacion = scanner.nextDouble();
                                     if(precioHabitacion<=0)
                                     {
-                                        throw new DatosHabitacionInvalidosExcepcion("La habitacion no puede dar dinero ni ser gratis C:");
+                                        throw new DatosHabitacionInvalidosExcepcion("La habitacion no puede dar dinero ni ser gratis C:\n");
                                     }
                                     aux.setprecioNoche(precioHabitacion);
 
                                     if(hotel.agregar(aux))
                                     {
-                                        System.out.println("Habitacion añadida correctamente");
+                                        System.out.println("Habitacion añadida correctamente\n");
                                         habitacionValida=true;
                                         valido=0;
                                     }else{
-                                        System.out.println("Hubo un error al añadir la habitacion");
+                                        System.out.println("Hubo un error al añadir la habitacion\n");
                                     }
 
                                 }catch(DatosHabitacionInvalidosExcepcion e)
@@ -132,11 +144,11 @@ public class MenuAdministrador {
                                 }
                                 catch(InputMismatchException e)
                                 {
-                                    System.out.println("Debe ingresar los datos pedidos");
+                                    System.out.println("Debe ingresar los datos pedidos\n");
                                     scanner.nextLine();
                                 }catch(IllegalArgumentException e)
                                 {
-                                    System.out.println("Estado ingresado no valido");
+                                    System.out.println("Estado ingresado no valido\n");
                                 }
 
                        }
@@ -148,7 +160,7 @@ public class MenuAdministrador {
                     Habitacion aux=new Habitacion();
 
                     try{
-                        System.out.println("Ingrese el numero de habitacion que desea eliminar");
+                        System.out.println("Ingrese el numero de habitacion que desea eliminar\n");
                         int numHabitacion=scanner.nextInt();
                         scanner.nextLine();
 
@@ -157,29 +169,29 @@ public class MenuAdministrador {
 
                         if(aux==null)
                         {
-                            System.out.println("La habitacion no existe");
+                            System.out.println("La habitacion no existe\n");
                             break;
                         }
 
                         if(aux.getEstado()==Estado.OCUPADA)
                         {
 
-                            System.out.println("La habitacion esta ocupada no se puede eliminar");
+                            System.out.println("La habitacion esta ocupada no se puede eliminar\n");
 
                         }else
                         {
                             if(hotel.eliminarHabitacion(numHabitacion))
                             {
-                                System.out.println("La habitacion se elimino correctamente");
+                                System.out.println("La habitacion se elimino correctamente\n");
                             }else
                             {
-                                System.out.println("Error al eliminar la habitacion");
+                                System.out.println("Error al eliminar la habitacion\n");
                             }
                         }
                     }catch(InputMismatchException e)
                     {
 
-                        System.out.println("Debe ingresar un numero valido");
+                        System.out.println("Debe ingresar un numero valido\n");
                     }
 
                     break;
@@ -190,21 +202,21 @@ public class MenuAdministrador {
                 }
                 case 4:{
                     Recepcionista recepcionista=new Recepcionista();
-                    System.out.println("Ingrese nombre del recepcionista");
+                    System.out.println("Ingrese nombre del recepcionista\n");
                     scanner.nextLine();
                     String nombreRecepcionista=scanner.nextLine();
                     recepcionista.setNombre(nombreRecepcionista);
-                    recepcionista.setRol("Recepcionista");
+                    recepcionista.setRol("Recepcionista\n");
 
                     boolean dniValido=false;
 
                     while(!dniValido)
                     {
-                        System.out.println("Ingrese dni del recepcionista");
+                        System.out.println("Ingrese dni del recepcionista\n");
                         String dniRecepsionista=scanner.next();
                         if(hotel.verificarDniExistente(dniRecepsionista))
                         {
-                            System.out.println("El dni ingresado ya existe");
+                            System.out.println("El dni ingresado ya existe\n");
                         }else
                         {
                             recepcionista.setDni(dniRecepsionista);
@@ -214,9 +226,9 @@ public class MenuAdministrador {
 
                     if(hotel.agregar(recepcionista))
                     {
-                        System.out.println("El recepcionista se agrego correctamente");
+                        System.out.println("El recepcionista se agrego correctamente\n");
                     }else {
-                        System.out.println("Hubo un error al agregar el recepcionista");
+                        System.out.println("Hubo un error al agregar el recepcionista\n");
                     }
                     break;
                 }
@@ -228,23 +240,23 @@ public class MenuAdministrador {
                     {
                         try{
 
-                            System.out.println("Ingrese la id del recepcionista a elimianr");
+                            System.out.println("Ingrese la id del recepcionista a eliminar\n");
                             int idRecepcionista=scanner.nextInt();
                             scanner.nextLine();
                             idValido=true;
                             aux.setId(idRecepcionista);
                             if(hotel.getUsuarios().getLista().remove(aux))
                             {
-                                System.out.println("El recepcionista fue eliminado correctamente");
+                                System.out.println("El recepcionista fue eliminado correctamente\n");
                             }else
                             {
-                                System.out.println("El dni ingresado no existe");
+                                System.out.println("El dni ingresado no existe\n");
                             }
 
 
                         }catch(InputMismatchException e)
                         {
-                            System.out.println("Debe ingresar un dni valido");
+                            System.out.println("Debe ingresar un dni valido\n");
                             scanner.nextLine();
                         }
                     }
@@ -266,18 +278,11 @@ public class MenuAdministrador {
                 }
 
                 default:
-                    System.out.println("Opcion equivocada");
+                    System.out.println("Opcion equivocada\n");
             }
 
 
         }while(opcion!=0);
-
-
-
-
-
-
-
 
 
      scanner.close();

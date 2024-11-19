@@ -52,7 +52,7 @@ public class Gestor <T>{
     @Override
     public String toString() {
         return "Gestor{" +
-                "lista=" + lista +
+                "Lista:" + lista +
                 '}';
     }
 

@@ -123,10 +123,10 @@ public class Habitacion implements IJson {
     @Override
     public String toString() {
         return "Habitacion{" +
-                "numeroHabitacion=" + numeroHabitacion +
-                ", capacidad=" + capacidad +
-                ", estado=" + estado +
-                ", precioPorNoche=" + precioNoche +
+                "NumeroHabitacion:" + numeroHabitacion +
+                ", Capacidad:" + capacidad +
+                ", Estado:" + estado +
+                ", PrecioPorNoche:" + precioNoche +
                 '}';
     }
 

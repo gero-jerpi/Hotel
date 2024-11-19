@@ -129,11 +129,11 @@ public class Cliente implements IJson {
     @Override
     public String toString() {
         return "Cliente{" +
-                "id=" + id +
-                ", dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", domicilio='" + domicilio + '\'' +
-                ", origen='" + origen + '\'' +
+                "Id:" + id +
+                ", Dni:'" + dni + '\'' +
+                ", Nombre:'" + nombre + '\'' +
+                ", Domicilio:'" + domicilio + '\'' +
+                ", Origen:'" + origen + '\'' +
                 '}';
     }
 

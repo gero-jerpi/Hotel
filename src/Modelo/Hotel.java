@@ -282,9 +282,9 @@ public class Hotel implements IJson {
     @Override
     public String toString() {
         return "Hotel{" +
-                ", habitaciones=" + habitaciones +
-                ", reservas=" + reservas +
-                ", usuarios=" + usuarios +
+                ", Habitaciones:" + habitaciones +
+                ", Reservas:" + reservas +
+                ", Usuarios:" + usuarios +
                 '}';
     }
 

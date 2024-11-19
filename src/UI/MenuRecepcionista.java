@@ -70,20 +70,31 @@ public class MenuRecepcionista {
 
 
         do {
-
-
-            System.out.println("Elegir una opcion: \n");
-
-            System.out.println("1. CHECK IN");
-            System.out.println("2. CHECK OUT");
-            System.out.println("3. LISTAR RESERVAS");
-            System.out.println("4. LISTAR RESERVAS POR CLIENTE");
-            System.out.println("5. LISTAR HABITACIONES DISPONIBLES");
-            System.out.println("6. LISTAR HABITACIONES OCUPADAS");
-            System.out.println("7. LISTAR HABITACIONES NO DISPONIBLE");
-            System.out.println("8. CAMBIAR ESTADO HABITACION");
-            System.out.println("9. GUARDAR DATOS");
-            System.out.println("0. FINALIZAR EJECUCIÓN");
+            System.out.println("""
+                    Elige una de las siguientes opciones:
+                    ________
+                    Chequeos
+                    --------
+                    1) Check in.
+                    2) Check out.
+                    ________
+                    Reservas
+                    --------
+                    3) Listar reservas.
+                    4) Listar reservas por cliente.
+                    ____________
+                    Habitaciones
+                    ------------
+                    5) Listar habitaciones disponibles.
+                    6) Listar habitaciones ocupadas.
+                    7) Listar habitaciones no disponibles.
+                    8) Cambiar estado de una habitación.
+                    ______
+                    Extras
+                    ------
+                    9) Guardar datos.
+                    0) Finalizar ejecución.
+                    """);
 
             opcion = scanner.nextInt();
 
@@ -94,15 +105,15 @@ public class MenuRecepcionista {
                     Cliente clienteNuevo = new Cliente();
 
 
-                    System.out.println("Ingrese el DNI del Cliente");
+                    System.out.println("Ingrese el DNI del Cliente\n");
                     String dni = scanner.next();
                     if (!verificarNoContieneLetras(dni) || !verificarLongitudDNI(dni)) {
-                        throw new IllegalArgumentException("ERROR:DNI INVALIDO");
+                        throw new IllegalArgumentException("ERROR:DNI INVALIDO\n");
                     }
                     clienteNuevo.setDni(dni);
 
 
-                    System.out.println("Ingrese el nombre del Cliente");
+                    System.out.println("Ingrese el nombre del Cliente\n");
                     scanner.nextLine();
                     String nombre = scanner.nextLine();
                     nombre = capitalizarPrimerCaracter(nombre); //Transformo su primer caracter a mayus y el resto a minus
@@ -112,21 +123,21 @@ public class MenuRecepcionista {
                     clienteNuevo.setNombre(nombre);
 
 
-                    System.out.println("Ingrese el domicilio del Cliente");
+                    System.out.println("Ingrese el domicilio del Cliente\n");
                     String domicilio = scanner.nextLine();
                     if (!verificar3MasCaracteres(domicilio)) {///PODRIA TENER VERIFICACIONES PARA Q SEA UNA DIRECCIÓN REAL EJ:DAIREAUX 1827
                         throw new IllegalArgumentException("ERROR:DOMICILIO INVALIDO");
                     }
                     clienteNuevo.setDomicilio(domicilio);
 
-                    System.out.println("Ingrese el origen del Cliente");
+                    System.out.println("Ingrese el origen del Cliente\n");
                     String origen = scanner.nextLine();
                     if (!verificarNoContieneNumeros(origen) || !verificar3MasCaracteres(origen)) {
                         throw new IllegalArgumentException("ERROR:ORIGEN INVALIDO");
                     }
                     clienteNuevo.setOrigen(origen);
 
-                    System.out.println("Ingrese el NRO de habitacion a elegir.");
+                    System.out.println("Ingrese el NRO de habitacion a elegir.\n");
                     System.out.println(hotel.listarHabitacionesDisponibles());
 
 
