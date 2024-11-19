@@ -80,7 +80,7 @@ public class MenuAdministrador {
 
                             try{
 
-
+                                
                                 System.out.println("Ingrese numero de habitacion");
                                 int numHabitacion=scanner.nextInt();
                                 scanner.nextLine();
@@ -89,6 +89,11 @@ public class MenuAdministrador {
                                     throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion debe ser mayor a 0");
                                 }
                                 aux.setNumeroHabitacion(numHabitacion);
+
+                                if(hotel.getHabitaciones().getLista().contains(aux))
+                                {
+                                    throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion ya existe");
+                                }
 
                                 System.out.println("Ingrese capacidad de la habitacion");
                                 int capacidadHabitacion= scanner.nextInt();
@@ -138,16 +143,44 @@ public class MenuAdministrador {
                     break;
                 }
                 case 2:{
-                    System.out.println("Ingrese el numero de habitacion que desea eliminar");
-                    int numHabitacion=scanner.nextInt();
-                    scanner.nextLine();
-                    if(hotel.eliminarHabitacion(numHabitacion))
+
+                    Habitacion aux=new Habitacion();
+
+                    try{
+                        System.out.println("Ingrese el numero de habitacion que desea eliminar");
+                        int numHabitacion=scanner.nextInt();
+                        scanner.nextLine();
+
+
+                        aux=hotel.buscarHabitacionXnumero(numHabitacion);
+
+                        if(aux==null)
+                        {
+                            System.out.println("La habitacion no existe");
+                            break;
+                        }
+
+                        if(aux.getEstado()==Estado.OCUPADA)
+                        {
+
+                            System.out.println("La habitacion esta ocupada no se puede eliminar");
+
+                        }else
+                        {
+                            if(hotel.eliminarHabitacion(numHabitacion))
+                            {
+                                System.out.println("La habitacion se elimino correctamente");
+                            }else
+                            {
+                                System.out.println("Error al eliminar la habitacion");
+                            }
+                        }
+                    }catch(InputMismatchException e)
                     {
-                        System.out.println("La habitacion se elimino correctamente");
-                    }else
-                    {
-                        System.out.println("La habitacion ingresada no existe");
+
+                        System.out.println("Debe ingresar un numero valido");
                     }
+
                     break;
                 }
                 case 3:{
