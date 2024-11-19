@@ -145,8 +145,8 @@ public class Reserva {
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("id", this.id);
-            jsonObject.put("habitacion", this.habitacion.habitacionAJSON());
-            jsonObject.put("cliente", this.cliente.clienteAJSON());
+            jsonObject.put("habitacion", this.habitacion.toJSON());
+            jsonObject.put("cliente", this.cliente.toJSON());
             jsonObject.put("fechaInicio", this.fechaInicio);
             jsonObject.put("fechaFin", this.fechaFin);
         } catch (JSONException e) {

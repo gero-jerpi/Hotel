@@ -1,12 +1,13 @@
 package Modelo;
 
 import ENUMS.Estado;
+import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Habitacion {
+public class Habitacion implements IJson {
 
 
     /// ATRIBUTOS
@@ -71,6 +72,23 @@ public class Habitacion {
 
     /// METODOS
 
+    /// HABITACION A JSON
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("numeroHabitacion", this.numeroHabitacion);
+            jsonObject.put("capacidad", this.capacidad);
+            jsonObject.put("estado", this.estado);
+            jsonObject.put("precioNoche", this.precioNoche);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return jsonObject;
+    }
+
+
     /// JSON A HABITACION
 
     public static Habitacion JSONAhabitacion(JSONObject jsonObject){
@@ -86,24 +104,6 @@ public class Habitacion {
         }
         return habitacion;
     }
-
-
-
-    /// HABITACION A JSON
-
-    public JSONObject habitacionAJSON(){
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("numeroHabitacion", this.numeroHabitacion);
-            jsonObject.put("capacidad", this.capacidad);
-            jsonObject.put("estado", this.estado);
-            jsonObject.put("precioNoche", this.precioNoche);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        return jsonObject;
-    }
-
 
 
     /// SOBREESCRITURA

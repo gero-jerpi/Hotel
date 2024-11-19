@@ -2,6 +2,7 @@ package Modelo;
 
 import Contenedores.Gestor;
 import ENUMS.Estado;
+import Interfaces.IJson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +10,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 
-public class Hotel {
+public class Hotel implements IJson {
 
 
     /// ATRIBUTOS
@@ -79,7 +80,8 @@ public class Hotel {
 
     /// HOTEL A JSON
 
-    public JSONObject hotelAJSON() {
+    @Override
+    public JSONObject toJSON() {
         JSONObject hotel = new JSONObject();
         JSONArray habitaciones = new JSONArray();
         JSONArray usuarios = new JSONArray();
@@ -88,7 +90,7 @@ public class Hotel {
 
         try {
             for (Habitacion habitacion : getHabitaciones().getLista()) {
-                habitaciones.put(habitacion.habitacionAJSON());
+                habitaciones.put(habitacion.toJSON());
             }
 
             hotel.put("habitaciones", habitaciones);
@@ -100,7 +102,7 @@ public class Hotel {
             hotel.put("reservas", reservas);
 
             for (Usuario usuario : getUsuarios().getLista()) {
-                usuarios.put(usuario.recepcionistaAJSON());
+                usuarios.put(usuario.toJSON());
             }
 
             hotel.put("usuarios", usuarios);
@@ -112,6 +114,7 @@ public class Hotel {
 
         return hotel;
     }
+
 
 
 
@@ -173,7 +176,7 @@ public class Hotel {
 
         return stringBuilder.toString();
     }
-    
+
     //LISTAR TODAS LAS HABITACIONES
 
     public String listarHabitaciones()
@@ -188,9 +191,7 @@ public class Hotel {
     }
 
 
-
     //LISTA LAS HABITACIONES NO DISPONIBLES Y SU ESTADO (EL POR QUÉ DE SU INDISPONIBILIDAD - OCUPADA - MANTENIMIENTO, ETC)
-
 
     public String listarHabitacionesNOdisponibles() {
         StringBuilder mensaje = new StringBuilder();

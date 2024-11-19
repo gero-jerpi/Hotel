@@ -1,11 +1,12 @@
 package Modelo;
 
+import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public abstract class Usuario {
+public abstract class Usuario implements IJson {
 
 
     /// ATRIBUTOS
@@ -81,7 +82,9 @@ public abstract class Usuario {
     /// METODOS
 
     /// RECEPCIONISTA A JSON
-    public JSONObject recepcionistaAJSON(){
+
+    @Override
+    public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
 
         try{
@@ -95,6 +98,8 @@ public abstract class Usuario {
 
         return jsonObject;
     }
+
+
 
 
 

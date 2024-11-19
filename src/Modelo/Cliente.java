@@ -1,9 +1,10 @@
 package Modelo;
 
+import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Cliente {
+public class Cliente implements IJson {
 
 
     /// ATRIBUTOS
@@ -85,6 +86,24 @@ public class Cliente {
 
     /// METODOS
 
+    /// CLIENTE A JSON
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("dni", this.dni);
+            jsonObject.put("nombre", this.nombre);
+            jsonObject.put("domicilio", this.domicilio);
+            jsonObject.put("origen", this.origen);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+
     /// JSON A CLIENTE
 
     public static Cliente JSONAcliente(JSONObject jsonObject){
@@ -101,21 +120,7 @@ public class Cliente {
         return cliente;
     }
 
-    /// CLIENTE A JSON
 
-    public JSONObject clienteAJSON(){
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("id", this.id);
-            jsonObject.put("dni", this.dni);
-            jsonObject.put("nombre", this.nombre);
-            jsonObject.put("domicilio", this.domicilio);
-            jsonObject.put("origen", this.origen);
-        }catch(JSONException e){
-            e.printStackTrace();
-        }
-        return jsonObject;
-    }
 
 
 

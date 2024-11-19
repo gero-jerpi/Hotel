@@ -77,12 +77,7 @@ public class MenuAdministrador {
                        {
                             int valido=1;
 
-
-
                                 try{
-
-
-
                                     System.out.println("Ingrese numero de habitacion");
                                     int numHabitacion=scanner.nextInt();
                                     scanner.nextLine();
@@ -261,7 +256,7 @@ public class MenuAdministrador {
                     break;
                 }
                 case 7:{
-                        JsonUtils.escribir(hotel.hotelAJSON(),"hotel.json");
+                        JsonUtils.escribir(hotel.toJSON(),"hotel.json");
                     break;
                 }
                 case 0:{
