@@ -252,7 +252,7 @@ public class MenuAdministrador {
                     break;
                 }
                 case 6:{
-                    System.out.println(hotel.listarRecpcionistas());
+                    System.out.println(hotel.listarRecepcionistas());
                     break;
                 }
                 case 7:{

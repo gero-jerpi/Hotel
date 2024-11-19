@@ -78,6 +78,7 @@ public class Hotel implements IJson {
     }
 
 
+
     /// HOTEL A JSON
 
     @Override
@@ -116,10 +117,7 @@ public class Hotel implements IJson {
     }
 
 
-
-
     //metodo  de la clase recepcionista : listar ocupadas con datos de ocupantes , habitaciones disponibles, y habitaciones NO disponibles por algún motivo
-
 
 
     //LISTA LAS HABITACIONES OCUPADAS CON LOS DATOS DE LOS OCUPANTES ^^
@@ -168,27 +166,24 @@ public class Hotel implements IJson {
     /// LISTAR RESERVAS
 
     public String listarReservas(){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for(Reserva reserva: reservas.getLista()){
-            stringBuilder = stringBuilder.append(reserva).append("\n");
-        }
-
-        return stringBuilder.toString();
+       return reservas.listar();
     }
 
     //LISTAR TODAS LAS HABITACIONES
 
     public String listarHabitaciones()
     {
-        StringBuilder mensaje =new StringBuilder();
-        Iterator<Habitacion> iterator = habitaciones.getLista().iterator();
-        while(iterator.hasNext())
-        {   Habitacion habitacion=iterator.next();
-            mensaje.append("Habitacion NRO ").append(habitacion.toString()).append("\n");
-        }
-        return mensaje.toString();
+        return habitaciones.listar();
     }
+
+
+    /////LISTAR RECEPCIONISTAS
+
+    public String listarRecepcionistas()
+    {
+        return usuarios.listar();
+    }
+
 
 
     //LISTA LAS HABITACIONES NO DISPONIBLES Y SU ESTADO (EL POR QUÉ DE SU INDISPONIBILIDAD - OCUPADA - MANTENIMIENTO, ETC)
@@ -283,25 +278,6 @@ public class Hotel implements IJson {
         }
         return false;
     }
-
-
-
-    /////LISTAR RECEPCIONISTAS
-
-    public String listarRecpcionistas()
-    {
-        StringBuilder mensaje=new StringBuilder();
-
-        for(Usuario usuario: usuarios.getLista())
-        {
-            if(usuario instanceof Recepcionista)
-            {
-                mensaje.append(usuario.toString()).append("\n");
-            }
-        }
-        return mensaje.toString();
-    }
-
 
 
     /// SOBREESCRITURA

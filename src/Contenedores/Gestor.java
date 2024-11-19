@@ -28,6 +28,24 @@ public class Gestor <T>{
         return true;
     }
 
+    public String listar(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (T objeto: lista){
+            stringBuilder = stringBuilder.append(objeto).append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+
+
+
+
+
+
+
+
 
     /// GETTERS && SETTERS
     public ArrayList<T> getLista() {
