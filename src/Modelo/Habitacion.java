@@ -8,13 +8,17 @@ import java.util.Objects;
 
 public class Habitacion {
 
+
+    /// ATRIBUTOS
+
     private int numeroHabitacion;
     private int capacidad;
     private Estado estado;
     private double precioNoche;
 
-///CONSTRUCTORES
 
+
+    /// CONSTRUCTORES
 
     public Habitacion(int capacidad, int numeroHabitacion, Estado estado, double precioNoche) {
         this.capacidad = capacidad;
@@ -23,50 +27,13 @@ public class Habitacion {
         this.precioNoche = precioNoche;
     }
 
-
     public  Habitacion(){
 
     }
 
 
-    /// JSON A HABITACION
-    public static Habitacion JSONAhabitacion(JSONObject jsonObject){
-        Habitacion habitacion = new Habitacion();
-
-        try{
-            String estado = jsonObject.getString("estado");
-
-            habitacion.setNumeroHabitacion(jsonObject.getInt("numeroHabitacion"));
-            habitacion.setCapacidad(jsonObject.getInt("capacidad"));
-            habitacion.setEstado(Estado.valueOf(estado));
-            habitacion.setprecioNoche(jsonObject.getDouble("precioNoche"));
-
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        return habitacion;
-    }
-
-/// HABITACION A JSON
-    public JSONObject habitacionAJSON(){
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("numeroHabitacion", this.numeroHabitacion);
-            jsonObject.put("capacidad", this.capacidad);
-            jsonObject.put("estado", this.estado);
-            jsonObject.put("precioNoche", this.precioNoche);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        return jsonObject;
-    }
-
 
     //GETTERS Y SETTERS
-
 
     public int getNumeroHabitacion() {
         return numeroHabitacion;
@@ -100,8 +67,46 @@ public class Habitacion {
         this.precioNoche = precioNoche;
     }
 
-    ///METODO EQUALS
 
+
+    /// METODOS
+
+    /// JSON A HABITACION
+
+    public static Habitacion JSONAhabitacion(JSONObject jsonObject){
+        Habitacion habitacion = new Habitacion();
+        try{
+            String estado = jsonObject.getString("estado");
+            habitacion.setNumeroHabitacion(jsonObject.getInt("numeroHabitacion"));
+            habitacion.setCapacidad(jsonObject.getInt("capacidad"));
+            habitacion.setEstado(Estado.valueOf(estado));
+            habitacion.setprecioNoche(jsonObject.getDouble("precioNoche"));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return habitacion;
+    }
+
+
+
+    /// HABITACION A JSON
+
+    public JSONObject habitacionAJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("numeroHabitacion", this.numeroHabitacion);
+            jsonObject.put("capacidad", this.capacidad);
+            jsonObject.put("estado", this.estado);
+            jsonObject.put("precioNoche", this.precioNoche);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return jsonObject;
+    }
+
+
+
+    /// SOBREESCRITURA
 
     @Override
     public boolean equals(Object o) {
@@ -114,12 +119,6 @@ public class Habitacion {
     public int hashCode() {
         return Objects.hashCode(numeroHabitacion);
     }
-
-
-
-
-    ///METODO TOSTRING
-
 
     @Override
     public String toString() {

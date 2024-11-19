@@ -7,13 +7,19 @@ import Modelo.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Scanner;
 
 public class Login {
+
+    /// CONSTRUCTOR
+
     public Login(){
 
     }
+
+
+
+    /// METODOS
 
     public void elegirMenu()throws DatosHabitacionInvalidosExcepcion {
         Gestor<Usuario> listaUsuarios = new Gestor<>();

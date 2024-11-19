@@ -2,13 +2,13 @@ package UI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class JsonUtils {
+
     public static void escribir(JSONObject jsonObject, String ruta){
         try {
             FileWriter fileWriter = new FileWriter(ruta);
@@ -29,10 +29,5 @@ public class JsonUtils {
         }
         return contenido;
     }
-
-
-
-
-
 
 }

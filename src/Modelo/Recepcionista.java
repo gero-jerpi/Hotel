@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class Recepcionista extends Usuario {
 
+
+    /// CONSTRUCTORES
+
     public Recepcionista(String nombre, String rol, String dni) {
         super(nombre, rol, dni);
     }
@@ -15,6 +18,11 @@ public class Recepcionista extends Usuario {
     public Recepcionista() {
 
     }
+
+
+
+
+    /// METODOS
 
 
     /// JSON A RECEPCIONISTA
@@ -33,7 +41,7 @@ public class Recepcionista extends Usuario {
     }
 
 
-/// CHECK IN
+    /// CHECK IN
 
     public Reserva crearReserva(Cliente cliente, Habitacion habitacion) throws FechaInvalidaException {
         Reserva nuevaReserva = new Reserva();
@@ -61,6 +69,7 @@ public class Recepcionista extends Usuario {
 
         return nuevaReserva;
     }
+
 
 
 }
