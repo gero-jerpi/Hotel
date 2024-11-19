@@ -101,8 +101,6 @@ public abstract class Usuario implements IJson {
 
 
 
-
-
     /// SOBREESCRITURA
 
     @Override
@@ -123,7 +121,7 @@ public abstract class Usuario implements IJson {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", rol='" + rol + '\'' +
+                ", dni='" + dni + '\'' +
                 '}';
     }
-
 }

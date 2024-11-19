@@ -1,15 +1,16 @@
 package Contenedores;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Gestor <T>{
 
     /// ATRIBUTOS
-    private ArrayList<T> lista;
+    private HashSet<T> lista;
 
     /// CONSTRUCTOR
     public Gestor(){
-        this.lista = new ArrayList<>();
+        this.lista = new HashSet<>();
     }
 
 
@@ -19,9 +20,6 @@ public class Gestor <T>{
             throw new IllegalArgumentException("NULO");
         }
 
-        if(lista.contains(objeto)){
-            throw new IllegalArgumentException("CONTIENE");
-        }
 
         lista.add(objeto);
 
@@ -39,23 +37,16 @@ public class Gestor <T>{
     }
 
 
-
-
-
-
-
-
-
-
     /// GETTERS && SETTERS
-    public ArrayList<T> getLista() {
+
+
+    public HashSet<T> getLista() {
         return lista;
     }
 
-    public void setLista(ArrayList<T> lista) {
+    public void setLista(HashSet<T> lista) {
         this.lista = lista;
     }
-
 
     /// SOBREESCRITURA
     @Override

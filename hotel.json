@@ -8,15 +8,21 @@
         },
         {
             "estado": "DISPONIBLE",
-            "numeroHabitacion": 555,
-            "precioNoche": 50,
-            "capacidad": 5
+            "numeroHabitacion": 123124,
+            "precioNoche": 23,
+            "capacidad": 12312
         },
         {
             "estado": "DISPONIBLE",
             "numeroHabitacion": 40,
             "precioNoche": 30,
             "capacidad": 4
+        },
+        {
+            "estado": "DISPONIBLE",
+            "numeroHabitacion": 555,
+            "precioNoche": 50,
+            "capacidad": 5
         }
     ],
     "reservas": [
@@ -62,6 +68,5 @@
         "nombre": "Gero",
         "rol": "Recepcionista",
         "dni": "44859245"
-    }],
-    "nombre": "HOTEL"
+    }]
 }
