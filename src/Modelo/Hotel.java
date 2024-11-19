@@ -162,8 +162,18 @@ public class Hotel {
         return mensaje.toString();
     }
 
+    /// LISTAR RESERVAS
 
+    public String listarReservas(){
+        StringBuilder stringBuilder = new StringBuilder();
 
+        for(Reserva reserva: reservas.getLista()){
+            stringBuilder = stringBuilder.append(reserva).append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+    
     //LISTAR TODAS LAS HABITACIONES
 
     public String listarHabitaciones()
