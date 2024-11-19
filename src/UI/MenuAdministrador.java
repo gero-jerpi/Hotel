@@ -21,7 +21,7 @@ public class MenuAdministrador {
 
         try{
             JSONObject datosJSON = new JSONObject(JsonUtils.leer("hotel.json"));
-
+            
             JSONArray habitaciones = datosJSON.getJSONArray("habitaciones");
 
             for(int i=0; i<habitaciones.length(); i++){

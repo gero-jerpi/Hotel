@@ -7,14 +7,19 @@ import java.util.Objects;
 
 public abstract class Usuario {
 
+
+    /// ATRIBUTOS
+
     protected int id;
-    protected static int idIncremental=1;
     protected String nombre;
     protected String rol;
     protected String dni;
 
+    protected static int idIncremental=1;
 
-   ///CONSTRUCTORES
+
+
+   /// CONSTRUCTORES
 
     public Usuario(String nombre, String rol, String dni) {
         this.id = idIncremental++;
@@ -27,25 +32,9 @@ public abstract class Usuario {
         this.id = idIncremental++;
     }
 
-    /// RECEPCIONISTA A JSON
-    public JSONObject recepcionistaAJSON(){
-        JSONObject jsonObject = new JSONObject();
-
-        try{
-            jsonObject.put("id", this.id);
-            jsonObject.put("nombre", this.nombre);
-            jsonObject.put("rol", this.rol);
-            jsonObject.put("dni", this.dni);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        return jsonObject;
-    }
 
 
-//GETTERS Y SETTERS
-
+    //GETTERS Y SETTERS
 
     public static int getIdIncremental() {
         return idIncremental;
@@ -89,8 +78,27 @@ public abstract class Usuario {
 
 
 
+    /// METODOS
 
-    ///METODO EQUALS
+    /// RECEPCIONISTA A JSON
+    public JSONObject recepcionistaAJSON(){
+        JSONObject jsonObject = new JSONObject();
+
+        try{
+            jsonObject.put("id", this.id);
+            jsonObject.put("nombre", this.nombre);
+            jsonObject.put("rol", this.rol);
+            jsonObject.put("dni", this.dni);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return jsonObject;
+    }
+
+
+
+    /// SOBREESCRITURA
 
     @Override
     public boolean equals(Object o) {
@@ -103,10 +111,6 @@ public abstract class Usuario {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
-
-    ///TOSTRING
-
 
     @Override
     public String toString() {

@@ -11,20 +11,16 @@ import java.util.Iterator;
 
 public class Hotel {
 
+
     /// ATRIBUTOS
-    private String nombre;
+
     private Gestor<Habitacion> habitaciones;
     private Gestor<Reserva> reservas;
     private Gestor<Usuario> usuarios;
 
 
+
     /// CONSTRUCTORES
-    public Hotel(String nombre) {
-        this.nombre = nombre;
-        this.habitaciones = new Gestor<>();
-        this.reservas = new Gestor<>();
-        this.usuarios = new Gestor<>();
-    }
 
     public Hotel() {
         this.habitaciones = new Gestor<>();
@@ -32,7 +28,57 @@ public class Hotel {
         this.usuarios = new Gestor<>();
     }
 
+
+
+    /// GETTERS && SETTERS
+
+
+    public Gestor<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Gestor<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public Gestor<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Gestor<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    public Gestor<Habitacion> getHabitaciones() {
+        return habitaciones;
+    }
+
+    public void setHabitaciones(Gestor<Habitacion> habitaciones) {
+        this.habitaciones = habitaciones;
+    }
+
+
+    /// METODOS
+
+
+    public boolean agregar(Object objeto) {
+        if (objeto instanceof Habitacion) {
+            habitaciones.agregar((Habitacion) objeto);
+        } else if (objeto instanceof Reserva) {
+            reservas.agregar((Reserva) objeto);
+
+        } else if (objeto instanceof Usuario) {
+            usuarios.agregar((Usuario) objeto);
+        } else {
+            throw new IllegalArgumentException("NO EXISTE");
+        }
+
+        return true;
+    }
+
+
     /// HOTEL A JSON
+
     public JSONObject hotelAJSON() {
         JSONObject hotel = new JSONObject();
         JSONArray habitaciones = new JSONArray();
@@ -41,8 +87,6 @@ public class Hotel {
 
 
         try {
-            hotel.put("nombre", this.nombre);
-
             for (Habitacion habitacion : getHabitaciones().getLista()) {
                 habitaciones.put(habitacion.habitacionAJSON());
             }
@@ -70,58 +114,9 @@ public class Hotel {
     }
 
 
-    /// GETTERS && SETTERS
-    public Gestor<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(Gestor<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public Gestor<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(Gestor<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
-    public Gestor<Habitacion> getHabitaciones() {
-        return habitaciones;
-    }
-
-    public void setHabitaciones(Gestor<Habitacion> habitaciones) {
-        this.habitaciones = habitaciones;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-
-    /// METODOS
-    public boolean agregar(Object objeto) {
-        if (objeto instanceof Habitacion) {
-            habitaciones.agregar((Habitacion) objeto);
-        } else if (objeto instanceof Reserva) {
-            reservas.agregar((Reserva) objeto);
-
-        } else if (objeto instanceof Usuario) {
-            usuarios.agregar((Usuario) objeto);
-        } else {
-            throw new IllegalArgumentException("NO EXISTE");
-        }
-
-        return true;
-    }
-
 
     //metodo  de la clase recepcionista : listar ocupadas con datos de ocupantes , habitaciones disponibles, y habitaciones NO disponibles por algún motivo
+
 
 
     //LISTA LAS HABITACIONES OCUPADAS CON LOS DATOS DE LOS OCUPANTES ^^
@@ -145,7 +140,10 @@ public class Hotel {
 
     }
 
+
+
     //LISTA LAS HABITACIONES DISPONIBLES
+
     public String listarHabitacionesDisponibles() {
         StringBuilder mensaje = new StringBuilder();
 
@@ -163,7 +161,11 @@ public class Hotel {
 
         return mensaje.toString();
     }
+
+
+
     //LISTAR TODAS LAS HABITACIONES
+
     public String listarHabitaciones()
     {
         StringBuilder mensaje =new StringBuilder();
@@ -175,7 +177,11 @@ public class Hotel {
         return mensaje.toString();
     }
 
+
+
     //LISTA LAS HABITACIONES NO DISPONIBLES Y SU ESTADO (EL POR QUÉ DE SU INDISPONIBILIDAD - OCUPADA - MANTENIMIENTO, ETC)
+
+
     public String listarHabitacionesNOdisponibles() {
         StringBuilder mensaje = new StringBuilder();
         mensaje.append("Habitaciones NO disponibles : \n");
@@ -189,6 +195,8 @@ public class Hotel {
         }
         return mensaje.toString();
     }
+
+
 
     //LISTA LAS RESERVAS DE UN CLIENTE
 
@@ -208,6 +216,7 @@ public class Hotel {
     }
 
 
+
     ///BUSCAR HABITACION POR NUMERO
 
     public Habitacion buscarHabitacionXnumero(int numeroHabitacion) {
@@ -221,7 +230,10 @@ public class Hotel {
         return null;
     }
 
+
+
     //ELIMINAR HABITACION CHEQUEARLA PROQ SE GURO LA HICE COMO EL CULO ASJDHASJKHDJKASHDJKASHDJKASHDIUHAWKJEHAKJSDHKAJSDHKJASHDKJASHDKJHASDJKHASDHKJASHDKJASHD
+
     public boolean eliminarHabitacion(int num)
     {
         Habitacion aux=new Habitacion();
@@ -236,8 +248,8 @@ public class Hotel {
     }
 
 
-
     /////VERIFICAR DNI USUARIO EXISTE
+
     public boolean verificarDniExistente(String dni)
     {
         Iterator<Usuario> iterator= usuarios.getLista().iterator();
@@ -260,7 +272,11 @@ public class Hotel {
         }
         return false;
     }
+
+
+
     /////LISTAR RECEPCIONISTAS
+
     public String listarRecpcionistas()
     {
         StringBuilder mensaje=new StringBuilder();
@@ -274,11 +290,13 @@ public class Hotel {
         }
         return mensaje.toString();
     }
+
+
+
     /// SOBREESCRITURA
     @Override
     public String toString() {
         return "Hotel{" +
-                ", nombre='" + nombre + '\'' +
                 ", habitaciones=" + habitaciones +
                 ", reservas=" + reservas +
                 ", usuarios=" + usuarios +
