@@ -154,14 +154,16 @@ public class Hotel implements IJson {
         while ((iterator.hasNext())) {
             Habitacion habitacion = iterator.next();
 
-            if (habitacion.getEstado() == Estado.DISPONIBLE) {
-                mensaje.append("Habitacion NRO ").append(habitacion.getNumeroHabitacion()).append("\n").append(habitacion.toString());
+            if (habitacion.getEstado() == Estado.DISPONIBLE || habitacion.getEstado() == Estado.RESERVADA) {
+                mensaje.append("Habitacion NRO ").append(habitacion.getNumeroHabitacion()).append("\n").append(habitacion).append("\n");
             }
 
         }
 
         return mensaje.toString();
     }
+
+
 
     /// LISTAR RESERVAS
 

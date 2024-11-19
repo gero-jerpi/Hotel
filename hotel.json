@@ -13,7 +13,7 @@
             "capacidad": 12312
         },
         {
-            "estado": "DISPONIBLE",
+            "estado": "RESERVADA",
             "numeroHabitacion": 40,
             "precioNoche": 30,
             "capacidad": 4
@@ -60,6 +60,24 @@
                 "numeroHabitacion": 1234,
                 "precioNoche": 123,
                 "capacidad": 123
+            }
+        },
+        {
+            "cliente": {
+                "domicilio": "GERO",
+                "id": 3,
+                "origen": "GERO",
+                "nombre": "Gero",
+                "dni": "44859245"
+            },
+            "fechaInicio": "2025-04-30",
+            "id": 2,
+            "fechaFin": "2025-05-30",
+            "habitacion": {
+                "estado": "RESERVADA",
+                "numeroHabitacion": 40,
+                "precioNoche": 30,
+                "capacidad": 4
             }
         }
     ],

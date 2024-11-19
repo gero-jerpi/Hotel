@@ -9,6 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.xml.transform.Source;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -125,20 +129,33 @@ public class MenuRecepcionista {
                     clienteNuevo.setOrigen(origen);
 
                     System.out.println("Ingrese el NRO de habitacion a elegir.");
-                    hotel.listarHabitacionesDisponibles(); //ESTO NO LISTA NADA POR LO QUE COMENTÉ ARRIBA
+                    System.out.println(hotel.listarHabitacionesDisponibles());
+
 
 
                     try {
                         Habitacion habitacionNueva = hotel.buscarHabitacionXnumero(scanner.nextInt());
-                        if (habitacionNueva.getEstado() != Estado.DISPONIBLE) {
+                        if (habitacionNueva.getEstado() != Estado.DISPONIBLE && habitacionNueva.getEstado() != Estado.RESERVADA) {
                             throw new HabitacionNoDisponibleException();
                         }
                         Reserva nuevaReserva = recepcionista.crearReserva(clienteNuevo, habitacionNueva); //CREO LA RESERVA
                         scanner.nextLine();
-                        habitacionNueva.setEstado(Estado.OCUPADA); //LA SETEO EN OCUPADA
-                        hotel.getReservas().agregar(nuevaReserva); //Agrego la reserva a la lista
 
-                    } catch (FechaInvalidaException | HabitacionNoDisponibleException e) {
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaActual = new Date();
+                        Date fechaInicio = formatoFecha.parse(nuevaReserva.getFechaInicio());
+
+                        if(fechaInicio.equals(fechaActual)){
+                            nuevaReserva.getHabitacion().setEstado(Estado.OCUPADA);
+                        }else if(fechaInicio.compareTo(fechaActual) >= 0){
+                            nuevaReserva.getHabitacion().setEstado(Estado.RESERVADA);
+                        }else{
+                            System.out.println("La fecha de inicio ya ha pasado");
+                        }
+                        
+                        hotel.agregar(nuevaReserva); //Agrego la reserva a la lista
+
+                    } catch (FechaInvalidaException | HabitacionNoDisponibleException | ParseException e) {
                         throw new RuntimeException(e);
                     }
 
