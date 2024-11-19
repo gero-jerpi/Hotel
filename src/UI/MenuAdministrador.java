@@ -104,7 +104,9 @@ public class MenuAdministrador {
                                     System.out.println("Ingrese estado de la habitacion");
                                     for(Estado estado:Estado.values())
                                     {
-                                        System.out.println("-"+estado);
+                                        if(!estado.equals(Estado.OCUPADA)){
+                                            System.out.println("-"+estado);
+                                        }
                                     }
                                     String estadoHabitacion= scanner.nextLine().toUpperCase();
                                     Estado estado=Estado.valueOf(estadoHabitacion);
@@ -201,7 +203,7 @@ public class MenuAdministrador {
 
                     while(!dniValido)
                     {
-                        System.out.println("Ingrese dni del recepsionista");
+                        System.out.println("Ingrese dni del recepcionista");
                         String dniRecepsionista=scanner.next();
                         if(hotel.verificarDniExistente(dniRecepsionista))
                         {
