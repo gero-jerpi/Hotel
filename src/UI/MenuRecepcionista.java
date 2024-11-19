@@ -31,7 +31,6 @@ public class MenuRecepcionista {
         try {
             JSONObject datosJSON = new JSONObject(JsonUtils.leer("hotel.json"));
 
-            hotel.setNombre(datosJSON.getString("nombre")); //HOTEL CREO Q SOLO TIENE NOMBRE, OSEA NO LE PASO EL CONTENIDO // !!!!!CHEQUEAR ESTO !!!!!!
 
             JSONArray habitaciones = datosJSON.getJSONArray("habitaciones");
 
@@ -75,11 +74,13 @@ public class MenuRecepcionista {
 
             System.out.println("1. CHECK IN");
             System.out.println("2. CHECK OUT");
-            System.out.println("3. LISTAR HABITACIONES DISPONIBLES");
-            System.out.println("4. LISTAR HABITACIONES OCUPADAS");
-            System.out.println("5. LISTAR HABITACIONES NO DISPONIBLE");
-            System.out.println("6. CAMBIAR ESTADO HABITACION");
-            System.out.println("7. GUARDAR DATOS");
+            System.out.println("3. LISTAR RESERVAS");
+            System.out.println("4. LISTAR RESERVAS POR CLIENTE");
+            System.out.println("5. LISTAR HABITACIONES DISPONIBLES");
+            System.out.println("6. LISTAR HABITACIONES OCUPADAS");
+            System.out.println("7. LISTAR HABITACIONES NO DISPONIBLE");
+            System.out.println("8. CAMBIAR ESTADO HABITACION");
+            System.out.println("9. GUARDAR DATOS");
             System.out.println("0. FINALIZAR EJECUCIÓN");
 
             opcion = scanner.nextInt();
@@ -146,42 +147,64 @@ public class MenuRecepcionista {
                 }
                 case 2: {
 
+                    System.out.println("Ingrese ID de reserva para terminar la reserva.");
+                    ///ACA IRIA LISTAR RESERVAS
+                    Reserva reservaAux = new Reserva();
+                    reservaAux.setId(scanner.nextInt());
+                    scanner.nextLine();
 
-                    System.out.println("Ingrese ID de reserva para terminar la reserva."); //PDRIA SSER CON DNI CLIENTE
-
-                    Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
-                    if (habitacionAux == null) {
-                        throw new IllegalArgumentException("ERROR:NUMERO DE HABITACIÓN INCORRECTO");
+                    if (!hotel.getReservas().getLista().contains(reservaAux)) {
+                        throw new IllegalArgumentException("ERROR:ID DE RESERVA NO EXISTE"); /// ESTA VERIFICACION NO LA VEO NECESARIA
                     }
 
                     Iterator<Reserva> iterator = hotel.getReservas().getLista().iterator();
-                    while (iterator.hasNext()) {
-                        Reserva reserva = iterator.next();
-                        if (reserva.getHabitacion().equals(habitacionAux)) {
-                            iterator.remove();
-                            reserva.getHabitacion().setEstado(Estado.DISPONIBLE);
-                        }
 
+                    while (iterator.hasNext()) {
+                        Reserva reservaActual = iterator.next();
+                        Habitacion habitacion = reservaActual.getHabitacion();
+
+                        if (reservaActual.equals(reservaAux)) { //SI LAS RESERVAS COINCIDEN
+                            habitacion.setEstado(Estado.DISPONIBLE); //HABITACION AHORA ESTÁ DISPONIBLE
+                            iterator.remove();  // REMUEVO LA RESEERVA
+                            System.out.println("Check-out realizado con éxito.");
+                        }
                     }
 
                     break;
                 }
+
+
                 case 3: {
-                    System.out.println(hotel.listarHabitaciones());
+
+                    System.out.println(hotel.listarReservas());
+
                     break;
                 }
 
                 case 4: {
-                    System.out.println(hotel.listarHabitacionesOcupadas());
+                    System.out.println("Ingrese el ID del cliente");
+                    System.out.println(hotel.listarReservasXCliente(scanner.nextInt()));
+                    scanner.nextLine();
+
                     break;
                 }
 
                 case 5: {
-                    System.out.println(hotel.listarHabitacionesNOdisponibles());
+                    System.out.println(hotel.listarHabitaciones());
                     break;
                 }
 
                 case 6: {
+                    System.out.println(hotel.listarHabitacionesOcupadas());
+                    break;
+                }
+
+                case 7: {
+                    System.out.println(hotel.listarHabitacionesNOdisponibles());
+                    break;
+                }
+
+                case 8: {
                     System.out.println("Ingrese el número de habitación que desea modificar :");
                     Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
 
@@ -209,15 +232,15 @@ public class MenuRecepcionista {
                     break;
                 }
 
-                case 7: {
-                    JsonUtils.escribir(hotel.hotelAJSON(), "hotel.json");
+                case 9: {
+                    JsonUtils.escribir(hotel.toJSON(), "hotel.json");
                     break;
                 }
 
                 case 0: {
                     System.out.println("╭────── · · ୨୧ · · ──────╮");
                     System.out.println("    Saliendo del menú");
-                    System.out.println( "╰────── · · ୨୧ · · ──────╯");
+                    System.out.println("╰────── · · ୨୧ · · ──────╯");
                     break;
                 }
 
@@ -302,10 +325,6 @@ public class MenuRecepcionista {
         System.out.println("4-LIMPIEZA");
 
     }
-
-
-
-
 
 
 }

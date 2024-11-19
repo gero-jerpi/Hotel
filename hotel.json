@@ -1,10 +1,24 @@
 {
-    "habitaciones": [{
-        "estado": "OCUPADA",
-        "numeroHabitacion": 1234,
-        "precioNoche": 123,
-        "capacidad": 123
-    }],
+    "habitaciones": [
+        {
+            "estado": "OCUPADA",
+            "numeroHabitacion": 1234,
+            "precioNoche": 123,
+            "capacidad": 123
+        },
+        {
+            "estado": "DISPONIBLE",
+            "numeroHabitacion": 555,
+            "precioNoche": 50,
+            "capacidad": 5
+        },
+        {
+            "estado": "DISPONIBLE",
+            "numeroHabitacion": 40,
+            "precioNoche": 30,
+            "capacidad": 4
+        }
+    ],
     "reservas": [
         {
             "cliente": {
