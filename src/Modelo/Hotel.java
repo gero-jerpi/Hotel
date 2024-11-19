@@ -131,7 +131,7 @@ public class Hotel implements IJson {
         while (iteradorReserva.hasNext()) {
             Reserva reserva = iteradorReserva.next();
             if (reserva.getHabitacion().getEstado() == Estado.OCUPADA) {
-                mensaje.append("Habitación NRO ").append(reserva.getHabitacion().getNumeroHabitacion()).append("\n").append(reserva.getHabitacion().toString()).append("\n").append("Datos del cliente :\n").append(reserva.getCliente().toString());
+                mensaje.append(reserva.getHabitacion().toString()).append("\n").append("Datos del cliente :\n").append(reserva.getCliente().toString());
 
             }
 
@@ -155,7 +155,7 @@ public class Hotel implements IJson {
             Habitacion habitacion = iterator.next();
 
             if (habitacion.getEstado() == Estado.DISPONIBLE || habitacion.getEstado() == Estado.RESERVADA) {
-                mensaje.append("Habitacion NRO ").append(habitacion.getNumeroHabitacion()).append("\n").append(habitacion).append("\n");
+                mensaje.append(habitacion).append("\n");
             }
 
         }
@@ -198,7 +198,7 @@ public class Hotel implements IJson {
             Habitacion habitacion = iterator.next();
 
             if (habitacion.getEstado() != Estado.DISPONIBLE) {
-                mensaje.append("Habitacion NRO ").append(habitacion.getNumeroHabitacion()).append("\n").append(habitacion.toString()).append("\nMotivo : ").append(habitacion.getEstado());
+                mensaje.append(habitacion).append("\nMotivo : ").append(habitacion.getEstado());
             }
         }
         return mensaje.toString();
@@ -271,15 +271,11 @@ public class Hotel implements IJson {
                 {
                     return true;
                 }
-            }else {
-                if(((Administrador)usuario).getDni().compareToIgnoreCase(dni)==0)
-                {
-                    return true;
-                }
             }
         }
         return false;
     }
+
 
 
     /// SOBREESCRITURA

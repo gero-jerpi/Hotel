@@ -101,7 +101,7 @@ public class MenuAdministrador {
                                     System.out.println("Ingrese estado de la habitacion");
                                     for(Estado estado:Estado.values())
                                     {
-                                        if(!estado.equals(Estado.OCUPADA)){
+                                        if(!estado.equals(Estado.OCUPADA) && !estado.equals(Estado.RESERVADA)){
                                             System.out.println("-"+estado);
                                         }
                                     }

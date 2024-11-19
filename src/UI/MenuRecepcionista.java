@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.xml.transform.Source;
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -141,6 +142,8 @@ public class MenuRecepcionista {
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                         Date fechaActual = new Date();
                         Date fechaInicio = formatoFecha.parse(nuevaReserva.getFechaInicio());
+                        fechaActual = formatoFecha.parse(formatoFecha.format(fechaActual));
+                        fechaInicio = formatoFecha.parse(formatoFecha.format(fechaInicio));
 
                         if(fechaInicio.equals(fechaActual)){
                             nuevaReserva.getHabitacion().setEstado(Estado.OCUPADA);
@@ -148,6 +151,7 @@ public class MenuRecepcionista {
                             nuevaReserva.getHabitacion().setEstado(Estado.RESERVADA);
                         }else{
                             System.out.println("La fecha de inicio ya ha pasado");
+                            break;
                         }
 
                         hotel.agregar(nuevaReserva); //Agrego la reserva a la lista
@@ -162,6 +166,7 @@ public class MenuRecepcionista {
                 case 2: {
 
                     System.out.println("Ingrese ID de reserva para terminar la reserva.");
+                    System.out.println(hotel.listarReservas());
                     ///ACA IRIA LISTAR RESERVAS
                     Reserva reservaAux = new Reserva();
                     reservaAux.setId(scanner.nextInt());

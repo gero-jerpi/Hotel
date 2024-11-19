@@ -7,6 +7,8 @@ import Modelo.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 import java.util.Scanner;
 
 public class Login {
@@ -22,7 +24,30 @@ public class Login {
     /// METODOS
 
     public void elegirMenu()throws DatosHabitacionInvalidosExcepcion {
+        MenuAdministrador menuAdministrador = new MenuAdministrador();
+        MenuRecepcionista menuRecepcionista = new MenuRecepcionista();
         Gestor<Usuario> listaUsuarios = new Gestor<>();
+
+
+        File archivoJSON = new File("hotel.json");
+        if(!archivoJSON.exists()){
+            System.out.println("Creando archivo....");
+            JSONObject hotel = new JSONObject();
+            JSONArray habitaciones = new JSONArray();
+            JSONArray usuarios = new JSONArray();
+            JSONArray reservas = new JSONArray();
+
+            try {
+                hotel.put("usuarios", usuarios);
+                hotel.put("habitaciones", habitaciones);
+                hotel.put("reservas", reservas);
+                JsonUtils.escribir(hotel, "hotel.json");
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
         try {
             JSONObject dataJSON = new JSONObject(JsonUtils.leer("hotel.json"));
 
@@ -48,12 +73,11 @@ public class Login {
         String dni = scanner.next();
 
         if(nombre.equals("admin") && dni.equals("admin")){
-            MenuAdministrador menuAdministrador = new MenuAdministrador();
+
             menuAdministrador.menu();
         } else {
             for(Usuario usuario: listaUsuarios.getLista()){
                 if(usuario.getNombre().equals(nombre) && usuario.getDni().equals(dni)){
-                    MenuRecepcionista menuRecepcionista = new MenuRecepcionista();
                     menuRecepcionista.menu();
                 }else{
                     System.out.println("Usuario no existente");

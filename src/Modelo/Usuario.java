@@ -99,8 +99,6 @@ public abstract class Usuario implements IJson {
         return jsonObject;
     }
 
-
-
     /// SOBREESCRITURA
 
     @Override
