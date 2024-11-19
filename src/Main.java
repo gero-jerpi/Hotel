@@ -13,18 +13,6 @@ public class Main {
     Login login = new Login();
     login.elegirMenu();
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*
         Hotel hotel = new Hotel();
         Habitacion habitacion = new Habitacion(123, 123, Estado.DISPONIBLE, 123);

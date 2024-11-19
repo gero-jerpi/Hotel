@@ -295,13 +295,11 @@ public class MenuRecepcionista {
 
 
     public void menuEstadosParaModificar() {
-
         System.out.println("Ingrese un estado para asignar a la habitación");
         System.out.println("1-DISPONIBLE");
-        System.out.println("2-OCUPADA");
-        System.out.println("3-RESERVADA");
-        System.out.println("4-MANTENIMIENTO");
-        System.out.println("5-LIMPIEZA");
+        System.out.println("2-RESERVADA");
+        System.out.println("3-MANTENIMIENTO");
+        System.out.println("4-LIMPIEZA");
 
     }
 
