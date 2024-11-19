@@ -208,15 +208,15 @@ public class Hotel implements IJson {
 
     //LISTA LAS RESERVAS DE UN CLIENTE
 
-    public String listarReservasXCliente(int id) {
+    public String listarReservasXCliente(String dni) {
         StringBuilder mensaje = new StringBuilder();
         Iterator<Reserva> iterador = reservas.getLista().iterator();
         mensaje.append("Reservas del cliente :");
         while (iterador.hasNext()) {
             Reserva reserva = iterador.next();
 
-            if (reserva.getCliente().getId() == id) {
-                mensaje.append(reserva.toString()).append("\n");
+            if (reserva.getCliente().getDni().equals(dni)) {
+                mensaje.append(reserva).append("\n");
 
             }
         }

@@ -15,7 +15,7 @@ public class MenuAdministrador {
 
     }
 
-    public void menu()throws DatosHabitacionInvalidosExcepcion{
+    public void menu() throws DatosHabitacionInvalidosExcepcion{
         Hotel hotel = new Hotel();
         Scanner scanner =new Scanner(System.in);
 
@@ -47,9 +47,6 @@ public class MenuAdministrador {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println(hotel);
-
 
         int opcion = 0;
         do {

@@ -62,9 +62,6 @@ public class MenuRecepcionista {
             throw new RuntimeException(e);
         }
 
-        System.out.println(hotel);
-
-
         Scanner scanner = new Scanner(System.in);
 
 
@@ -152,7 +149,7 @@ public class MenuRecepcionista {
                         }else{
                             System.out.println("La fecha de inicio ya ha pasado");
                         }
-                        
+
                         hotel.agregar(nuevaReserva); //Agrego la reserva a la lista
 
                     } catch (FechaInvalidaException | HabitacionNoDisponibleException | ParseException e) {
@@ -199,8 +196,8 @@ public class MenuRecepcionista {
                 }
 
                 case 4: {
-                    System.out.println("Ingrese el ID del cliente");
-                    System.out.println(hotel.listarReservasXCliente(scanner.nextInt()));
+                    System.out.println("Ingrese el DNI del cliente");
+                    System.out.println(hotel.listarReservasXCliente(scanner.next()));
                     scanner.nextLine();
 
                     break;
@@ -272,6 +269,7 @@ public class MenuRecepcionista {
 
         } while (opcion != 0);
 
+        scanner.close();
 
     }
 
