@@ -36,22 +36,22 @@ public class MenuRecepcionista {
             JSONArray habitaciones = datosJSON.getJSONArray("habitaciones");
 
             for (int i = 0; i < habitaciones.length(); i++) {
-                JSONObject jsonObject = habitaciones.getJSONObject(i);
-                hotel.agregar(Habitacion.JSONAhabitacion(jsonObject));
+                Habitacion habitacion = Habitacion.JSONAhabitacion(habitaciones.getJSONObject(i));
+                hotel.agregar(habitacion);
             }
 
             JSONArray usuarios = datosJSON.getJSONArray("usuarios");
 
             for (int i = 0; i < usuarios.length(); i++) {
-                JSONObject jsonObject = usuarios.getJSONObject(i);
-                hotel.agregar(Recepcionista.JSONArecepcionista(jsonObject));
+                Usuario usuario = Recepcionista.JSONArecepcionista(usuarios.getJSONObject(i));
+                hotel.agregar(usuario);
             }
 
             JSONArray reservas = datosJSON.getJSONArray("reservas");
 
             for (int i = 0; i < reservas.length(); i++) {
-                JSONObject jsonObject = reservas.getJSONObject(i);
-                hotel.agregar(Reserva.JSONAreserva(jsonObject));
+                Reserva reserva = Reserva.JSONAreserva(reservas.getJSONObject(i));
+                hotel.agregar(reserva);
             }
 
 
@@ -80,7 +80,7 @@ public class MenuRecepcionista {
             System.out.println("5. LISTAR HABITACIONES NO DISPONIBLE");
             System.out.println("6. CAMBIAR ESTADO HABITACION");
             System.out.println("7. GUARDAR DATOS");
-            System.out.println("8. FINALIZAR EJECUCIÓN");
+            System.out.println("0. FINALIZAR EJECUCIÓN");
 
             opcion = scanner.nextInt();
 
@@ -100,7 +100,8 @@ public class MenuRecepcionista {
 
 
                     System.out.println("Ingrese el nombre del Cliente");
-                    String nombre = scanner.next();
+                    scanner.nextLine();
+                    String nombre = scanner.nextLine();
                     nombre = capitalizarPrimerCaracter(nombre); //Transformo su primer caracter a mayus y el resto a minus
                     if (!verificar3MasCaracteres(nombre) || !verificarNoContieneNumeros(nombre)) { //Verifico q el nombre tenga mas de 3 caracteres y q no contenga numeros
                         throw new IllegalArgumentException("ERROR:NOMBRE INVALIDO");
@@ -109,20 +110,20 @@ public class MenuRecepcionista {
 
 
                     System.out.println("Ingrese el domicilio del Cliente");
-                    String domicilio = scanner.next();
+                    String domicilio = scanner.nextLine();
                     if (!verificar3MasCaracteres(domicilio)) {///PODRIA TENER VERIFICACIONES PARA Q SEA UNA DIRECCIÓN REAL EJ:DAIREAUX 1827
                         throw new IllegalArgumentException("ERROR:DOMICILIO INVALIDO");
                     }
                     clienteNuevo.setDomicilio(domicilio);
 
                     System.out.println("Ingrese el origen del Cliente");
-                    String origen = scanner.next();
+                    String origen = scanner.nextLine();
                     if (!verificarNoContieneNumeros(origen) || !verificar3MasCaracteres(origen)) {
                         throw new IllegalArgumentException("ERROR:ORIGEN INVALIDO");
                     }
                     clienteNuevo.setOrigen(origen);
 
-                    System.out.println("Ingrese el NRO de habitacion a elegir.\n");
+                    System.out.println("Ingrese el NRO de habitacion a elegir.");
                     hotel.listarHabitacionesDisponibles(); //ESTO NO LISTA NADA POR LO QUE COMENTÉ ARRIBA
 
 
@@ -146,7 +147,7 @@ public class MenuRecepcionista {
                 case 2: {
 
 
-                    System.out.println("Ingrese el numero de habitación para terminar la reserva."); //PDRIA SSER CON DNI CLIENTE
+                    System.out.println("Ingrese ID de reserva para terminar la reserva."); //PDRIA SSER CON DNI CLIENTE
 
                     Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
                     if (habitacionAux == null) {
@@ -166,33 +167,57 @@ public class MenuRecepcionista {
                     break;
                 }
                 case 3: {
-
-
+                    System.out.println(hotel.listarHabitaciones());
                     break;
                 }
 
                 case 4: {
-
+                    System.out.println(hotel.listarHabitacionesOcupadas());
                     break;
                 }
 
                 case 5: {
-
+                    System.out.println(hotel.listarHabitacionesNOdisponibles());
                     break;
                 }
 
                 case 6: {
+                    System.out.println("Ingrese el número de habitación que desea modificar :");
+                    Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
 
+                    if (habitacionAux == null) {
+                        throw new IllegalArgumentException("ERROR:NUMERO INCORRECTO");
+                    }
+                    scanner.nextLine();
+                    menuEstadosParaModificar();
+                    String estadoHabitacion = scanner.nextLine().toUpperCase(); //El cliente ingresa un estado de habitación (ignora minusculas supongo)
+
+
+                    try {
+                        Estado estado = Estado.valueOf(estadoHabitacion);   //creo un estado nuevo y lo igualo al ingresado por teclado (si coincide con algun valor del enum)
+                        Iterator<Habitacion> iterador = hotel.getHabitaciones().getLista().iterator(); //iterador para las habitaciones
+                        while (iterador.hasNext()) {
+                            Habitacion habitacion = iterador.next();
+                            if (habitacion.equals(habitacionAux)) { //si las habitacion ingresada existe le cambio el estado al ingresado x teclado
+                                habitacion.setEstado(estado);
+                                System.out.println("Estado cambiado correctamente!");
+                            }
+                        }
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 }
 
                 case 7: {
-
+                    JsonUtils.escribir(hotel.hotelAJSON(), "hotel.json");
                     break;
                 }
 
-                case 8: {
-
+                case 0: {
+                    System.out.println("╭────── · · ୨୧ · · ──────╮");
+                    System.out.println("    Saliendo del menú");
+                    System.out.println( "╰────── · · ୨୧ · · ──────╯");
                     break;
                 }
 
@@ -205,7 +230,7 @@ public class MenuRecepcionista {
             }
 
 
-        } while (opcion != 8);
+        } while (opcion != 0);
 
 
     }
@@ -267,6 +292,22 @@ public class MenuRecepcionista {
     public boolean verificarLongitudDNI(String dni) {
         return dni != null && dni.length() >= 7 && dni.length() <= 8;
     }
+
+
+    public void menuEstadosParaModificar() {
+
+        System.out.println("Ingrese un estado para asignar a la habitación");
+        System.out.println("1-DISPONIBLE");
+        System.out.println("2-OCUPADA");
+        System.out.println("3-RESERVADA");
+        System.out.println("4-MANTENIMIENTO");
+        System.out.println("5-LIMPIEZA");
+
+    }
+
+
+
+
 
 
 }

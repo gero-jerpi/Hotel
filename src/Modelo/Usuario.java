@@ -14,7 +14,6 @@ public abstract class Usuario {
     protected String dni;
 
 
-
    ///CONSTRUCTORES
 
     public Usuario(String nombre, String rol, String dni) {
@@ -25,6 +24,7 @@ public abstract class Usuario {
     }
 
     public Usuario(){
+        this.id = idIncremental++;
     }
 
     /// RECEPCIONISTA A JSON

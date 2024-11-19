@@ -1,33 +1,53 @@
 {
     "habitaciones": [{
-        "estado": "DISPONIBLE",
-        "numeroHabitacion": 123,
+        "estado": "OCUPADA",
+        "numeroHabitacion": 1234,
         "precioNoche": 123,
         "capacidad": 123
     }],
-    "reservas": [{
-        "cliente": {
-            "domicilio": "asd",
-            "id": 1,
-            "origen": "asd",
-            "nombre": "gero",
-            "dni": "1234"
+    "reservas": [
+        {
+            "cliente": {
+                "domicilio": "asd",
+                "id": 1,
+                "origen": "asd",
+                "nombre": "gero",
+                "dni": "1234"
+            },
+            "fechaInicio": "LocalDate.now();",
+            "id": 0,
+            "fechaFin": "LocalDate.now();",
+            "habitacion": {
+                "estado": "DISPONIBLE",
+                "numeroHabitacion": 123,
+                "precioNoche": 123,
+                "capacidad": 123
+            }
         },
-        "fechaInicio": "LocalDate.now();",
-        "id": 0,
-        "fechaFin": "LocalDate.now();",
-        "habitacion": {
-            "estado": "DISPONIBLE",
-            "numeroHabitacion": 123,
-            "precioNoche": 123,
-            "capacidad": 123
+        {
+            "cliente": {
+                "domicilio": "AJDS JS",
+                "id": 2,
+                "origen": "asjd  j",
+                "nombre": " ajsd j",
+                "dni": "44859245"
+            },
+            "fechaInicio": "2023-09-03",
+            "id": 1,
+            "fechaFin": "2024-09-04",
+            "habitacion": {
+                "estado": "OCUPADA",
+                "numeroHabitacion": 1234,
+                "precioNoche": 123,
+                "capacidad": 123
+            }
         }
-    }],
+    ],
     "usuarios": [{
-        "id": 0,
-        "nombre": "gero",
-        "rol": "jungla",
-        "dni": "1234"
+        "id": 1,
+        "nombre": "Gero",
+        "rol": "Recepcionista",
+        "dni": "44859245"
     }],
     "nombre": "HOTEL"
 }

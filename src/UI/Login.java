@@ -23,8 +23,9 @@ public class Login {
             JSONArray usuarios = dataJSON.getJSONArray("usuarios");
 
             for(int i=0; i<usuarios.length(); i++){
-                JSONObject jsonObject = usuarios.getJSONObject(i);
-                listaUsuarios.agregar(Recepcionista.JSONArecepcionista(jsonObject));
+                Usuario usuario = Recepcionista.JSONArecepcionista(usuarios.getJSONObject(i));
+                Usuario.setIdIncremental(Usuario.getIdIncremental() - 1);
+                listaUsuarios.agregar(usuario);
             }
 
         } catch (JSONException e) {

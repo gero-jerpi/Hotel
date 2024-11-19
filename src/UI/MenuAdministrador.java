@@ -2,10 +2,7 @@ package UI;
 
 import ENUMS.Estado;
 import Excepciones.DatosHabitacionInvalidosExcepcion;
-import Modelo.Habitacion;
-import Modelo.Hotel;
-import Modelo.Recepcionista;
-import Modelo.Reserva;
+import Modelo.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,11 +15,10 @@ public class MenuAdministrador {
 
     }
 
-
-
     public void menu()throws DatosHabitacionInvalidosExcepcion{
         Hotel hotel = new Hotel();
         Scanner scanner =new Scanner(System.in);
+
         try{
             JSONObject datosJSON = new JSONObject(JsonUtils.leer("hotel.json"));
 
@@ -31,22 +27,22 @@ public class MenuAdministrador {
             JSONArray habitaciones = datosJSON.getJSONArray("habitaciones");
 
             for(int i=0; i<habitaciones.length(); i++){
-                JSONObject jsonObject = habitaciones.getJSONObject(i);
-                hotel.agregar(Habitacion.JSONAhabitacion(jsonObject));
+                Habitacion habitacion = Habitacion.JSONAhabitacion(habitaciones.getJSONObject(i));
+                hotel.agregar(habitacion);
             }
 
             JSONArray usuarios = datosJSON.getJSONArray("usuarios");
 
             for(int i=0; i<usuarios.length(); i++){
-                JSONObject jsonObject = usuarios.getJSONObject(i);
-                hotel.agregar(Recepcionista.JSONArecepcionista(jsonObject));
+                Usuario usuario = Recepcionista.JSONArecepcionista(usuarios.getJSONObject(i));
+                hotel.agregar(usuario);
             }
 
             JSONArray reservas = datosJSON.getJSONArray("reservas");
 
             for(int i=0; i<reservas.length(); i++){
-                JSONObject jsonObject = reservas.getJSONObject(i);
-                hotel.agregar(Reserva.JSONAreserva(jsonObject));
+                Reserva reserva = Reserva.JSONAreserva(reservas.getJSONObject(i));
+                hotel.agregar(reserva);
             }
 
 
@@ -161,7 +157,8 @@ public class MenuAdministrador {
                 case 4:{
                     Recepcionista recepcionista=new Recepcionista();
                     System.out.println("Ingrese nombre del recepcionista");
-                    String nombreRecepcionista=scanner.next();
+                    scanner.nextLine();
+                    String nombreRecepcionista=scanner.nextLine();
                     recepcionista.setNombre(nombreRecepcionista);
                     recepcionista.setRol("Recepcionista");
 
@@ -227,12 +224,16 @@ public class MenuAdministrador {
                         JsonUtils.escribir(hotel.hotelAJSON(),"hotel.json");
                     break;
                 }
+                case 0:{
+                    System.out.println("╭────── · · ୨୧ · · ──────╮");
+                    System.out.println("    Saliendo del menú");
+                    System.out.println( "╰────── · · ୨୧ · · ──────╯");
+                    break;
+                }
 
                 default:
                     System.out.println("Opcion equivocada");
             }
-
-
 
 
         }while(opcion!=0);

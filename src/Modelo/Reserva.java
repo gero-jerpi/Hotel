@@ -29,7 +29,7 @@ public class Reserva {
     }
 
     public Reserva() {
-
+        this.id = idIncremental++;
     }
 
 
