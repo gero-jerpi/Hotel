@@ -56,12 +56,12 @@ public class Recepcionista extends Usuario {
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.println("Ingrese la fecha de inicio de la reserva.\n"); ///QUIZAS ESTE PRINT NO DEBERÍA IR ACÁ
+        System.out.println("Ingrese la fecha de inicio de la reserva"); ///QUIZAS ESTE PRINT NO DEBERÍA IR ACÁ
         String finicio = scanner.next();
         if (!nuevaReserva.verificarFecha(finicio)) { //acá podria poner el scanner directamente
             throw new FechaInvalidaException();
         } else nuevaReserva.setFechaInicio(finicio);
-        System.out.println("Ingrese la fecha de fin de la reserva.\n");
+        System.out.println("Ingrese la fecha de fin de la reserva");
         String ffin = scanner.next();
         if (!nuevaReserva.verificarFecha(ffin)) {
             throw new FechaInvalidaException();

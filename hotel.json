@@ -1,5 +1,23 @@
 {
-    "habitaciones": [],
+    "habitaciones": [{
+        "estado": "LIMPIEZA",
+        "numeroHabitacion": 123,
+        "precioNoche": 100,
+        "capacidad": 1
+    }],
     "reservas": [],
-    "usuarios": []
+    "usuarios": [
+        {
+            "id": 1,
+            "nombre": "Gero",
+            "rol": "Recepcionista\n",
+            "dni": "44859245"
+        },
+        {
+            "id": 2,
+            "nombre": "agus",
+            "rol": "Recepcionista\n",
+            "dni": "12345678"
+        }
+    ]
 }

@@ -68,32 +68,42 @@ public class MenuRecepcionista {
 
         int opcion;
 
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_BLUE = "\u001B[34m";
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RED = "\u001B[31m";
+
 
         do {
             System.out.println("""
+                    
                     Elige una de las siguientes opciones:
                     ________
-                    Chequeos
+                    """ + ANSI_BLUE + "CHEQUEOS\n" + ANSI_RESET + """
                     --------
-                    1) Check in.
-                    2) Check out.
+                    [1] Check in
+                    [2] Check out
+                    
                     ________
-                    Reservas
+                    """ + ANSI_GREEN + "RESERVAS\n" + ANSI_RESET + """
                     --------
-                    3) Listar reservas.
-                    4) Listar reservas por cliente.
+                    [3] Listar reservas
+                    [4] Listar reservas por cliente
+                    
                     ____________
-                    Habitaciones
+                    """ + ANSI_YELLOW + "HABITACIONES\n" + ANSI_RESET + """
                     ------------
-                    5) Listar habitaciones disponibles.
-                    6) Listar habitaciones ocupadas.
-                    7) Listar habitaciones no disponibles.
-                    8) Cambiar estado de una habitación.
+                    [5] Listar habitaciones disponibles
+                    [6] Listar habitaciones ocupadas
+                    [7] Listar habitaciones no disponibles
+                    [8] Cambiar estado de una habitación
+                    
                     ______
-                    Extras
+                    """ + ANSI_RED + "EXTRAS\n" + ANSI_RESET + """
                     ------
-                    9) Guardar datos.
-                    0) Finalizar ejecución.
+                    9) Guardar datos
+                    0) Finalizar ejecución
                     """);
 
             opcion = scanner.nextInt();
@@ -105,7 +115,7 @@ public class MenuRecepcionista {
                     Cliente clienteNuevo = new Cliente();
 
 
-                    System.out.println("Ingrese el DNI del Cliente\n");
+                    System.out.println("Ingrese el DNI del Cliente");
                     String dni = scanner.next();
                     if (!verificarNoContieneLetras(dni) || !verificarLongitudDNI(dni)) {
                         throw new IllegalArgumentException("ERROR:DNI INVALIDO\n");
@@ -113,7 +123,7 @@ public class MenuRecepcionista {
                     clienteNuevo.setDni(dni);
 
 
-                    System.out.println("Ingrese el nombre del Cliente\n");
+                    System.out.println("Ingrese el nombre del Cliente");
                     scanner.nextLine();
                     String nombre = scanner.nextLine();
                     nombre = capitalizarPrimerCaracter(nombre); //Transformo su primer caracter a mayus y el resto a minus
@@ -123,23 +133,22 @@ public class MenuRecepcionista {
                     clienteNuevo.setNombre(nombre);
 
 
-                    System.out.println("Ingrese el domicilio del Cliente\n");
+                    System.out.println("Ingrese el domicilio del Cliente");
                     String domicilio = scanner.nextLine();
                     if (!verificar3MasCaracteres(domicilio)) {///PODRIA TENER VERIFICACIONES PARA Q SEA UNA DIRECCIÓN REAL EJ:DAIREAUX 1827
                         throw new IllegalArgumentException("ERROR:DOMICILIO INVALIDO");
                     }
                     clienteNuevo.setDomicilio(domicilio);
 
-                    System.out.println("Ingrese el origen del Cliente\n");
+                    System.out.println("Ingrese el origen del Cliente");
                     String origen = scanner.nextLine();
                     if (!verificarNoContieneNumeros(origen) || !verificar3MasCaracteres(origen)) {
                         throw new IllegalArgumentException("ERROR:ORIGEN INVALIDO");
                     }
                     clienteNuevo.setOrigen(origen);
 
-                    System.out.println("Ingrese el NRO de habitacion a elegir.\n");
+                    System.out.println("\nIngrese el NRO de habitacion a elegir");
                     System.out.println(hotel.listarHabitacionesDisponibles());
-
 
 
                     try {
@@ -220,7 +229,7 @@ public class MenuRecepcionista {
                 }
 
                 case 5: {
-                    System.out.println(hotel.listarHabitaciones());
+                    System.out.println(hotel.listarHabitacionesDisponibles());
                     break;
                 }
 
@@ -235,6 +244,7 @@ public class MenuRecepcionista {
                 }
 
                 case 8: {
+                    System.out.println(hotel.listarHabitaciones());
                     System.out.println("Ingrese el número de habitación que desea modificar :");
                     Habitacion habitacionAux = hotel.buscarHabitacionXnumero(scanner.nextInt());
 
@@ -264,6 +274,7 @@ public class MenuRecepcionista {
 
                 case 9: {
                     JsonUtils.escribir(hotel.toJSON(), "hotel.json");
+                    System.out.println("\n\033[32mDatos guardados con exito :)\033[0m\n");
                     break;
                 }
 

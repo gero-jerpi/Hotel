@@ -49,30 +49,38 @@ public class MenuAdministrador {
         }
 
         int opcion = 0;
+
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_BLUE = "\u001B[34m";
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RED = "\u001B[31m";
+
+
         do {
             System.out.println("""
+                    
                      Elige una de las siguientes opciones:
                      __________
-                     HABITACION
+                     """ + ANSI_BLUE + "HABITACIONES\n" + ANSI_RESET + """
                      ----------
-                     1) Agregar habitación.
-                     2) Eliminar habitación.
-                     3) Listar habitaciones.
-                    
+                     [1] Agregar
+                     [2] Eliminar
+                     [3] Listar
+          
                      ______________
-                     Recepcionistas
+                     """ + ANSI_YELLOW + "RECEPCIONISTAS\n" + ANSI_RESET + """
                      --------------
-                    
-                     4) Agregar recepcionista.
-                     5) Eliminar recepcionista.
-                     6) Listar recepcionistas.
+                     [4] Agregar
+                     [5] Eliminar
+                     [6] Listar
                     
                      ______
-                     Extras
+                     """ + ANSI_RED + "EXTRAS\n" + ANSI_RESET + """
                      ------
-                     7) Guardar datos.
-                     0) Finalizar ejecución.    
-                      """);
+                     [7] Guardar datos
+                     [0] Finalizar ejecución
+                     """);
             opcion=scanner.nextInt();
 
 
@@ -87,7 +95,7 @@ public class MenuAdministrador {
                             int valido=1;
 
                                 try{
-                                    System.out.println("Ingrese numero de habitacion \n");
+                                    System.out.println("Ingrese numero de habitacion");
                                     int numHabitacion=scanner.nextInt();
                                     scanner.nextLine();
                                     if(numHabitacion<=0)
@@ -101,7 +109,7 @@ public class MenuAdministrador {
                                         throw new DatosHabitacionInvalidosExcepcion("El numero de habitacion ya existe\n");
                                     }
 
-                                    System.out.println("Ingrese capacidad de la habitacion\n");
+                                    System.out.println("Ingrese capacidad de la habitacion");
                                     int capacidadHabitacion= scanner.nextInt();
                                     scanner.nextLine();
                                     if(capacidadHabitacion<=0)
@@ -110,7 +118,7 @@ public class MenuAdministrador {
                                     }
                                     aux.setCapacidad(capacidadHabitacion);
 
-                                    System.out.println("Ingrese estado de la habitacion\n");
+                                    System.out.println("Ingrese estado de la habitacion");
                                     for(Estado estado:Estado.values())
                                     {
                                         if(!estado.equals(Estado.OCUPADA) && !estado.equals(Estado.RESERVADA)){
@@ -121,7 +129,7 @@ public class MenuAdministrador {
                                     Estado estado=Estado.valueOf(estadoHabitacion);
                                     aux.setEstado(estado);
 
-                                    System.out.println("Ingrese precio de la habitacion\n");
+                                    System.out.println("Ingrese precio de la habitacion");
                                     double precioHabitacion = scanner.nextDouble();
                                     if(precioHabitacion<=0)
                                     {
@@ -160,7 +168,8 @@ public class MenuAdministrador {
                     Habitacion aux=new Habitacion();
 
                     try{
-                        System.out.println("Ingrese el numero de habitacion que desea eliminar\n");
+                        System.out.println(hotel.listarHabitaciones());
+                        System.out.println("Ingrese el numero de habitacion que desea eliminar");
                         int numHabitacion=scanner.nextInt();
                         scanner.nextLine();
 
@@ -202,7 +211,7 @@ public class MenuAdministrador {
                 }
                 case 4:{
                     Recepcionista recepcionista=new Recepcionista();
-                    System.out.println("Ingrese nombre del recepcionista\n");
+                    System.out.println("Ingrese nombre del recepcionista");
                     scanner.nextLine();
                     String nombreRecepcionista=scanner.nextLine();
                     recepcionista.setNombre(nombreRecepcionista);
@@ -212,7 +221,7 @@ public class MenuAdministrador {
 
                     while(!dniValido)
                     {
-                        System.out.println("Ingrese dni del recepcionista\n");
+                        System.out.println("Ingrese dni del recepcionista");
                         String dniRecepsionista=scanner.next();
                         if(hotel.verificarDniExistente(dniRecepsionista))
                         {
@@ -239,8 +248,8 @@ public class MenuAdministrador {
                     while(!idValido)
                     {
                         try{
-
-                            System.out.println("Ingrese la id del recepcionista a eliminar\n");
+                            System.out.println(hotel.listarRecepcionistas());
+                            System.out.println("Ingrese la id del recepcionista a eliminar");
                             int idRecepcionista=scanner.nextInt();
                             scanner.nextLine();
                             idValido=true;
@@ -250,13 +259,13 @@ public class MenuAdministrador {
                                 System.out.println("El recepcionista fue eliminado correctamente\n");
                             }else
                             {
-                                System.out.println("El dni ingresado no existe\n");
+                                System.out.println("El id ingresado no existe\n");
                             }
 
 
                         }catch(InputMismatchException e)
                         {
-                            System.out.println("Debe ingresar un dni valido\n");
+                            System.out.println("Debe ingresar un id valido\n");
                             scanner.nextLine();
                         }
                     }
@@ -268,6 +277,7 @@ public class MenuAdministrador {
                 }
                 case 7:{
                         JsonUtils.escribir(hotel.toJSON(),"hotel.json");
+                    System.out.println("\n\033[32mDatos guardados con exito :)\033[0m\n");
                     break;
                 }
                 case 0:{

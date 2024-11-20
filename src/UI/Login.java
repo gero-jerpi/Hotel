@@ -28,6 +28,7 @@ public class Login {
         MenuRecepcionista menuRecepcionista = new MenuRecepcionista();
         Gestor<Usuario> listaUsuarios = new Gestor<>();
 
+        System.out.println("\n\033[32mBienvenido al sistema!\033[0m\n");
 
         File archivoJSON = new File("hotel.json");
         if(!archivoJSON.exists()){
@@ -72,18 +73,24 @@ public class Login {
         System.out.println("Ingrese su dni");
         String dni = scanner.next();
 
-        if(nombre.equals("admin") && dni.equals("admin")){
+        boolean usuarioExistente = false;
 
+        if(nombre.equals("admin") && dni.equals("admin")){
             menuAdministrador.menu();
+            usuarioExistente = true;
         } else {
             for(Usuario usuario: listaUsuarios.getLista()){
                 if(usuario.getNombre().equals(nombre) && usuario.getDni().equals(dni)){
                     menuRecepcionista.menu();
-                }else{
-                    System.out.println("Usuario no existente");
+                    usuarioExistente = true;
                 }
             }
         }
+
+        if(usuarioExistente == false){
+            System.out.println("\n\u001B[31mDatos incorrectos :(\u001B[0m");
+        }
+
     }
 
 
